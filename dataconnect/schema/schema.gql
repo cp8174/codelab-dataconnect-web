@@ -13,30 +13,138 @@
  # limitations under the License.
 
 # Movies
+type Movie
+  @table {
+  id: UUID! @default(expr: "uuidV4()")
+  title: String!
+  imageUrl: String!
+  releaseYear: Int
+  genre: String
+  rating: Float
+  description: String
+  tags: [String]
+  #descriptionEmbedding: Vector @col(size:768) # Enables vector search
+}
 # TODO: Fill out Movie table
 
 # Movie Metadata
 # Movie - MovieMetadata is a one-to-one relationship
 # TODO: Fill out MovieMetadata table
+type MovieMetadata
+  @table {
+  # @ref creates a field in the current table (MovieMetadata)
+  # It is a reference that holds the primary key of the referenced type
+  # In this case, @ref(fields: "movieId", references: "id") is implied
+  movie: Movie! @ref
+  # movieId: UUID <- this is created by the above @ref
+  director: String
+}
 
 # Actors
 # Suppose an actor can participate in multiple movies and movies can have multiple actors
 # Movie - Actors (or vice versa) is a many to many relationship
 # TODO: Fill out Actor table
+type Actor @table {
+  id: UUID!
+  imageUrl: String!
+  name: String! @col(name: "name", dataType: "varchar(30)")
+}
 
 # Join table for many-to-many relationship for movies and actors
 # The 'key' param signifies the primary key(s) of this table
 # In this case, the keys are [movieId, actorId], the generated fields of the reference types [movie, actor]
 # TODO: Fill out MovieActor table
+type MovieActor @table(key: ["movie", "actor"]) {
+  # @ref creates a field in the current table (MovieActor) that holds the primary key of the referenced type
+  # In this case, @ref(fields: "id") is implied
+  movie: Movie!
+  # movieId: UUID! <- this is created by the implied @ref, see: implicit.gql
+
+  actor: Actor!
+  # actorId: UUID! <- this is created by the implied  @ref, see: implicit.gql
+
+  role: String! # "main" or "supporting"
+}
 
 # Users
 # Suppose a user can leave reviews for movies
 # user-reviews is a one to many relationship, movie-reviews is a one to many relationship, movie:user is a many to many relationship
 # TODO: Fill out User table
+type User
+  @table {
+  id: String! @col
+  username: String! @col(dataType: "varchar(50)")
+  # The following are generated from the @ref in the Review table
+  # reviews_on_user
+  # movies_via_Review
+}
 
 # Join table for many-to-many relationship for users and favorite movies
 # TODO: Fill out FavoriteMovie table
+type FavoriteMovie
+  @table(name: "FavoriteMovies", singular: "favorite_movie", plural: "favorite_movies", key: ["user", "movie"]) {
+  # @ref is implicit
+  user: User!
+  movie: Movie!
+}
 
 # Reviews
 # TODO: Fill out Review table
 
+type Review @table(name: "Reviews", key: ["movie", "user"]) {
+  id: UUID! @default(expr: "uuidV4()")
+  user: User!
+  movie: Movie!
+  rating: Int
+  reviewText: String
+  reviewDate: Date! @default(expr: "request.time")
+}
+
+# File Management Schema
+
+# File represents a file in the storage
+type File @table {
+  id: UUID! @default(expr: "uuidV4()")
+  name: String! @col(dataType: "varchar(255)")
+  storagePath: String! @col(dataType: "varchar(500)")
+  mimeType: String @col(dataType: "varchar(100)")
+  size: Int64!
+  folderId: UUID
+  folder: Folder @ref(fields: "folderId", references: "id")
+  uploadedBy: String! @col(dataType: "varchar(100)")
+  uploadedAt: Timestamp! @default(expr: "request.time")
+  updatedAt: Timestamp @default(expr: "request.time")
+  description: String @col(dataType: "text")
+  tags: [String]
+  isPublic: Boolean @default(value: false)
+  downloadCount: Int @default(value: 0)
+}
+
+# Folder represents a folder/directory structure
+type Folder @table {
+  id: UUID! @default(expr: "uuidV4()")
+  name: String! @col(dataType: "varchar(255)")
+  parentFolderId: UUID
+  parentFolder: Folder @ref(fields: "parentFolderId", references: "id")
+  createdBy: String! @col(dataType: "varchar(100)")
+  createdAt: Timestamp! @default(expr: "request.time")
+  updatedAt: Timestamp @default(expr: "request.time")
+  description: String @col(dataType: "text")
+  color: String @col(dataType: "varchar(20)")
+}
+
+# FileShare represents sharing permissions for files
+type FileShare @table(key: ["file", "sharedWith"]) {
+  file: File!
+  sharedWith: String! @col(dataType: "varchar(100)")
+  permission: SharePermission!
+  sharedBy: String! @col(dataType: "varchar(100)")
+  sharedAt: Timestamp! @default(expr: "request.time")
+}
+
+# Enum for share permissions
+enum SharePermission {
+  VIEW
+  EDIT
+  ADMIN
+}

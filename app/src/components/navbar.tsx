@@ -47,10 +47,13 @@ export default function Navbar() {
         <div className="flex items-center space-x-4">
           <Link to="/" className="flex items-center">
             <img src={firebaseLogo} alt="Firebase Logo" width={30} height={30} className="mr-2" />
-            <span className=" text-white text-lg font-bold hidden md:block">FriendlyMovies</span>
+            <span className=" text-white text-lg font-bold hidden md:block">File Manager</span>
+          </Link>
+          <Link to="/movies" className="text-gray-200 hover:text-white">
+            🎬 Movies
           </Link>
           <Link to="/vectorsearch" className="text-gray-200 hover:text-white">
-            Vector Search
+            🔍 Vector Search
           </Link>
         </div>
         <Link to="/advancedsearch" className="flex items-center text-gray-200 hover:text-white mx-auto">

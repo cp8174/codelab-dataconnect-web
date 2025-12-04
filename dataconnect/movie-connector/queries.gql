@@ -27,24 +27,230 @@
 #     description
 #   }
 # }
+# Above query won't sort the movies
 
+# List subset of fields for movies - sorted by release year
+query ListMovies($orderByReleaseYear: OrderDirection, $limit: Int) @auth(level: PUBLIC) {
+  movies(
+    orderBy: { releaseYear: $orderByReleaseYear }
+    limit: $limit
+  ) {
+    id
+    title
+    imageUrl
+    releaseYear
+    genre
+    rating
+    tags
+    description
+  }
+}
+
+# List subset of fields for movies - sorted by rating
+query ListMoviesByRating($orderByRating: OrderDirection, $limit: Int) @auth(level: PUBLIC) {
+  movies(
+    orderBy: { rating: $orderByRating }
+    limit: $limit
+  ) {
+    id
+    title
+    imageUrl
+    releaseYear
+    genre
+    rating
+    tags
+    description
+  }
+}
 # Get movie by id
-# TODO: Complete GetMovieById
+query GetMovieById($id: UUID!) @auth(level: PUBLIC) {
+movie(id: $id) {
+    id
+    title
+    imageUrl
+    releaseYear
+    genre
+    rating
+    description
+    tags
+    metadata: movieMetadatas_on_movie {
+      director
+    }
+    mainActors: actors_via_MovieActor(where: { role: { eq: "main" } }) {
+      id
+      name
+      imageUrl
+    }
+    supportingActors: actors_via_MovieActor(
+      where: { role: { eq: "supporting" } }
+    ) {
+      id
+      name
+      imageUrl
+    }
+    reviews: reviews_on_movie {
+      id
+      reviewText
+      reviewDate
+      rating
+      user {
+        id
+        username
+      }
+    }
+  }
+}
 
 # Get actor by id
-# TODO: Complete GetActorById
+query GetActorById($id: UUID!) @auth(level: PUBLIC) {
+  actor(id: $id) {
+    id
+    name
+    imageUrl
+    mainActors: movies_via_MovieActor(where: { role: { eq: "main" } }) {
+      id
+      title
+      genre
+      tags
+      imageUrl
+    }
+    supportingActors: movies_via_MovieActor(
+      where: { role: { eq: "supporting" } }
+    ) {
+      id
+      title
+      genre
+      tags
+      imageUrl
+    }
+  }
+}
+
 
 # Get current authenticated user
-# TODO: Complete GetCurrentUser
+# Get user by ID
+query GetCurrentUser @auth(level: USER) {
+  user(key: { id_expr: "auth.uid" }) {
+    id
+    username
+    reviews: reviews_on_user {
+      id
+      rating
+      reviewDate
+      reviewText
+      movie {
+        id
+        title
+      }
+    }
+    favoriteMovies: favorite_movies_on_user {
+      movie {
+        id
+        title
+        genre
+        imageUrl
+        releaseYear
+        rating
+        description
+        tags
+        metadata: movieMetadatas_on_movie {
+          director
+        }
+      }
+    }
+  }
+} 
 
 # Check if a movie is favorited by user
-# TODO: Complete GetIfFavoritedMovie
+query GetIfFavoritedMovie($movieId: UUID!) @auth(level: USER) {
+  favorite_movie(key: { userId_expr: "auth.uid", movieId: $movieId }) {
+    movieId
+  }
+}
 
 # Search for movies, actors, and reviews
-# TODO: Complete SearchAll
+query SearchAll(
+  $input: String
+  $minYear: Int!
+  $maxYear: Int!
+  $minRating: Float!
+  $maxRating: Float!
+  $genre: String!
+) @auth(level: PUBLIC) {
+  moviesMatchingTitle: movies(
+    where: {
+      _and: [
+        { releaseYear: { ge: $minYear } }
+        { releaseYear: { le: $maxYear } }
+        { rating: { ge: $minRating } }
+        { rating: { le: $maxRating } }
+        { genre: { contains: $genre } }
+        { title: { contains: $input } }
+      ]
+    }
+  ) {
+    id
+    title
+    genre
+    rating
+    imageUrl
+  }
+  moviesMatchingDescription: movies(
+    where: {
+      _and: [
+        { releaseYear: { ge: $minYear } }
+        { releaseYear: { le: $maxYear } }
+        { rating: { ge: $minRating } }
+        { rating: { le: $maxRating } }
+        { genre: { contains: $genre } }
+        { description: { contains: $input } }
+      ]
+    }
+  ) {
+    id
+    title
+    genre
+    rating
+    imageUrl
+  }
+  actorsMatchingName: actors(where: { name: { contains: $input } }) {
+    id
+    name
+    imageUrl
+  }
+  reviewsMatchingText: reviews(where: { reviewText: { contains: $input } }) {
+    id
+    rating
+    reviewText
+    reviewDate
+    movie {
+      id
+      title
+    }
+    user {
+      id
+      username
+    }
+  }
+}
 
 # Search movie descriptions using L2 similarity with Vertex AI
-# TODO: Complete SearchMovieDescriptionUsingL2Similarity
+# query SearchMovieDescriptionUsingL2Similarity($query: String!)
+# @auth(level: PUBLIC) {
+#   movies_descriptionEmbedding_similarity(
+#     compare_embed: { model: "textembedding-gecko@003", text: $query }
+#     method: L2
+#     within: 2
+#     limit: 5
+#   ) {
+#     id
+#     title
+#     description
+#     tags
+#     rating
+#     imageUrl
+#   }
+# }
 
 
 # # The queries below are unused by the application, but are useful examples for more complex cases
@@ -166,3 +372,137 @@
 #   }
 # }
 # # end of example queries
+
+# ============================================
+# File Management Queries
+# ============================================
+
+# List all files (optionally filtered by folder)
+query ListFiles($folderId: UUID) @auth(level: PUBLIC) {
+  files(where: { folderId: { eq: $folderId } }, orderBy: { uploadedAt: DESC }) {
+    id
+    name
+    storagePath
+    mimeType
+    size
+    folderId
+    uploadedBy
+    uploadedAt
+    updatedAt
+    description
+    tags
+    isPublic
+    downloadCount
+  }
+}
+
+# List all files by user
+query ListFilesByUser($userId: String!) @auth(level: PUBLIC) {
+  files(where: { uploadedBy: { eq: $userId } }, orderBy: { uploadedAt: DESC }) {
+    id
+    name
+    storagePath
+    mimeType
+    size
+    folderId
+    uploadedBy
+    uploadedAt
+    description
+    tags
+    downloadCount
+  }
+}
+
+# Get a single file by ID
+query GetFile($id: UUID!) @auth(level: PUBLIC) {
+  file(id: $id) {
+    id
+    name
+    storagePath
+    mimeType
+    size
+    folderId
+    folder {
+      id
+      name
+    }
+    uploadedBy
+    uploadedAt
+    updatedAt
+    description
+    tags
+    isPublic
+    downloadCount
+  }
+}
+
+# List all folders (optionally filtered by parent folder)
+query ListFolders($parentFolderId: UUID) @auth(level: PUBLIC) {
+  folders(where: { parentFolderId: { eq: $parentFolderId } }, orderBy: { createdAt: DESC }) {
+    id
+    name
+    parentFolderId
+    createdBy
+    createdAt
+    description
+    color
+  }
+}
+
+# Get a single folder by ID
+query GetFolder($id: UUID!) @auth(level: PUBLIC) {
+  folder(id: $id) {
+    id
+    name
+    parentFolderId
+    parentFolder {
+      id
+      name
+    }
+    createdBy
+    createdAt
+    description
+    color
+  }
+}
+
+# Search files by name
+query SearchFiles($searchTerm: String!) @auth(level: PUBLIC) {
+  files(where: { name: { contains: $searchTerm } }, orderBy: { uploadedAt: DESC }) {
+    id
+    name
+    storagePath
+    mimeType
+    size
+    folderId
+    uploadedBy
+    uploadedAt
+    description
+    tags
+    downloadCount
+  }
+}
+
+# Get recent files
+query GetRecentFiles($limit: Int = 20) @auth(level: PUBLIC) {
+  files(orderBy: { uploadedAt: DESC }, limit: $limit) {
+    id
+    name
+    storagePath
+    mimeType
+    size
+    folderId
+    uploadedBy
+    uploadedAt
+    description
+    tags
+    downloadCount
+  }
+}
+
+# Get storage stats for a user
+query GetUserStorageStats($userId: String!) @auth(level: PUBLIC) {
+  files(where: { uploadedBy: { eq: $userId } }) {
+    size
+  }
+}

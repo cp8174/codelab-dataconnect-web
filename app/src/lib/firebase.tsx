@@ -20,6 +20,7 @@ import {
   connectDataConnectEmulator,
   getDataConnect,
 } from "firebase/data-connect";
+import { getStorage, connectStorageEmulator } from "firebase/storage";
 import { connectorConfig } from '@movie/dataconnect';
 import { createContext } from "react";
 
@@ -37,10 +38,12 @@ const firebaseApp =
 
 const auth = getAuth(firebaseApp);
 const dataconnect = getDataConnect(firebaseApp, connectorConfig);
+const storage = getStorage(firebaseApp);
 
 if (process.env.NODE_ENV === "development") {
-  connectDataConnectEmulator(dataconnect, "127.0.0.1", 9399, false);
-  connectAuthEmulator(auth, "http://localhost:9099");
+  connectDataConnectEmulator(dataconnect, "127.0.0.1", 9390, false);
+  connectAuthEmulator(auth, "http://localhost:9089");
+  connectStorageEmulator(storage, "127.0.0.1", 9199);
 }
 
 const AuthContext = createContext(auth);

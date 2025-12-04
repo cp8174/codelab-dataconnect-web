@@ -13,13 +13,13 @@
  # limitations under the License.
 
 specVersion: "v1alpha"
-serviceId: "your-service-id"
+serviceId: "file-manager-fdc"
 location: "us-central1"
 schema:
   source: "./schema"
   datasource:
     postgresql:
-      database: "your-database"
+      database: "zfile-manager-v2"
       cloudSql:
         instanceId: "your-instance-id"
 connectorDirs: ["./movie-connector"]

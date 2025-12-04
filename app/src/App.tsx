@@ -22,6 +22,7 @@ import MoviePage from "./pages/Movie";
 import MyProfilePage from "./pages/MyProfile";
 import VectorSearchPage from "./pages/VectorSearch";
 import AdvancedSearchPage from "./pages/AdvancedSearch";
+import FileManager from "./pages/FileManager";
 import NotFound from "./pages/NotFound";
 import RootLayout from "./layout/RootLayout";
 
@@ -30,7 +31,8 @@ export default function App() {
     <Router>
       <RootLayout>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<FileManager />} />
+          <Route path="/movies" element={<Home />} />
           <Route path="/actor/:id" element={<ActorPage />} />
           <Route path="/movie/:id" element={<MoviePage />} />
           <Route path="/myprofile" element={<MyProfilePage />} />

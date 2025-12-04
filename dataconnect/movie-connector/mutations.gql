@@ -14,19 +14,45 @@
  #
 
 # Upsert (update or insert) a user based on their username
-# TODO: Complete UpsertUser
+# Create or update the current authenticated user
+mutation UpsertUser($username: String!) @auth(level: USER) {
+  user_upsert(
+    data: {
+      id_expr: "auth.uid"
+      username: $username
+    }
+  )
+}
+
 
 # Add a movie to the user's favorites list
-# TODO: Complete AddFavoritedMovie
+mutation AddFavoritedMovie($movieId: UUID!) @auth(level: USER) {
+  favorite_movie_upsert(data: { userId_expr: "auth.uid", movieId: $movieId })
+}
 
 # Remove a movie from the user's favorites list
-# TODO: Complete DeleteFavoritedMovie
+mutation DeleteFavoritedMovie($movieId: UUID!) @auth(level: USER) {
+  favorite_movie_delete(key: { userId_expr: "auth.uid", movieId: $movieId })
+}
 
 # Add a review for a movie
-# TODO: Complete AddReview
+mutation AddReview($movieId: UUID!, $rating: Int!, $reviewText: String!)
+@auth(level: USER) {
+  review_insert(
+    data: {
+      userId_expr: "auth.uid"
+      movieId: $movieId
+      rating: $rating
+      reviewText: $reviewText
+      reviewDate_date: { today: true }
+    }
+  )
+}
 
 # Delete a user's review for a movie
-# TODO: Complete DeleteReview
+mutation DeleteReview($movieId: UUID!) @auth(level: USER) {
+  review_delete(key: { userId_expr: "auth.uid", movieId: $movieId })
+}
 
 
 
@@ -79,3 +105,109 @@
 #   movie_deleteMany(where: { rating: { le: $minRating } })
 # }
 # End of example mutations
+
+# ============================================
+# File Management Mutations
+# ============================================
+
+# Create a new file entry (after uploading to storage)
+mutation CreateFile(
+  $name: String!
+  $storagePath: String!
+  $mimeType: String
+  $size: Int64!
+  $folderId: UUID
+  $uploadedBy: String!
+  $description: String
+  $tags: [String!]
+  $isPublic: Boolean
+) @auth(level: PUBLIC) {
+  file_insert(
+    data: {
+      name: $name
+      storagePath: $storagePath
+      mimeType: $mimeType
+      size: $size
+      folderId: $folderId
+      uploadedBy: $uploadedBy
+      description: $description
+      tags: $tags
+      isPublic: $isPublic
+    }
+  )
+}
+
+# Update file metadata
+mutation UpdateFile(
+  $id: UUID!
+  $name: String
+  $description: String
+  $tags: [String!]
+  $isPublic: Boolean
+  $folderId: UUID
+) @auth(level: PUBLIC) {
+  file_update(
+    id: $id
+    data: {
+      name: $name
+      description: $description
+      tags: $tags
+      isPublic: $isPublic
+      folderId: $folderId
+    }
+  )
+}
+
+# Delete a file entry
+mutation DeleteFile($id: UUID!) @auth(level: PUBLIC) {
+  file_delete(id: $id)
+}
+
+# Increment download count
+mutation IncrementDownloadCount($id: UUID!, $newCount: Int!) @auth(level: PUBLIC) {
+  file_update(
+    id: $id
+    data: { downloadCount: $newCount }
+  )
+}
+
+# Create a new folder
+mutation CreateFolder(
+  $name: String!
+  $parentFolderId: UUID
+  $createdBy: String!
+  $description: String
+  $color: String
+) @auth(level: PUBLIC) {
+  folder_insert(
+    data: {
+      name: $name
+      parentFolderId: $parentFolderId
+      createdBy: $createdBy
+      description: $description
+      color: $color
+    }
+  )
+}
+
+# Update folder
+mutation UpdateFolder(
+  $id: UUID!
+  $name: String
+  $description: String
+  $color: String
+) @auth(level: PUBLIC) {
+  folder_update(
+    id: $id
+    data: {
+      name: $name
+      description: $description
+      color: $color
+    }
+  )
+}
+
+# Delete a folder
+mutation DeleteFolder($id: UUID!) @auth(level: PUBLIC) {
+  folder_delete(id: $id)
+}

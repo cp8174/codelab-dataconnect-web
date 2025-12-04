@@ -1,0 +1,221 @@
+# File Manager Mock Data Insert
+
+mutation {
+  # Insert sample folders
+  folder_insertMany(
+    data: [
+      {
+        name: "Documents"
+        createdBy: "demo-user"
+        description: "Personal documents and files"
+        color: "#3B82F6"
+      }
+      {
+        name: "Images"
+        createdBy: "demo-user"
+        description: "Photos and images collection"
+        color: "#10B981"
+      }
+      {
+        name: "Videos"
+        createdBy: "demo-user"
+        description: "Video files and recordings"
+        color: "#8B5CF6"
+      }
+      {
+        name: "Music"
+        createdBy: "demo-user"
+        description: "Music and audio files"
+        color: "#F59E0B"
+      }
+      {
+        name: "Projects"
+        createdBy: "demo-user"
+        description: "Work and project files"
+        color: "#EF4444"
+      }
+    ]
+  )
+
+  # Insert sample files
+  file_insertMany(
+    data: [
+      # Documents
+      {
+        name: "Resume_2024.pdf"
+        storagePath: "files/demo-user/Resume_2024.pdf"
+        mimeType: "application/pdf"
+        size: 245760
+        uploadedBy: "demo-user"
+        description: "Professional resume for 2024"
+        tags: ["resume", "career", "pdf"]
+        isPublic: false
+        downloadCount: 5
+      }
+      {
+        name: "Project_Proposal.docx"
+        storagePath: "files/demo-user/Project_Proposal.docx"
+        mimeType: "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+        size: 512000
+        uploadedBy: "demo-user"
+        description: "Q1 2024 project proposal document"
+        tags: ["work", "proposal", "document"]
+        isPublic: false
+        downloadCount: 12
+      }
+      {
+        name: "Budget_2024.xlsx"
+        storagePath: "files/demo-user/Budget_2024.xlsx"
+        mimeType: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+        size: 87040
+        uploadedBy: "demo-user"
+        description: "Annual budget spreadsheet"
+        tags: ["finance", "budget", "spreadsheet"]
+        isPublic: false
+        downloadCount: 8
+      }
+
+      # Images
+      {
+        name: "vacation_photo_001.jpg"
+        storagePath: "files/demo-user/vacation_photo_001.jpg"
+        mimeType: "image/jpeg"
+        size: 2457600
+        uploadedBy: "demo-user"
+        description: "Beach vacation photo from summer 2024"
+        tags: ["vacation", "beach", "summer"]
+        isPublic: true
+        downloadCount: 23
+      }
+      {
+        name: "family_portrait.png"
+        storagePath: "files/demo-user/family_portrait.png"
+        mimeType: "image/png"
+        size: 4194304
+        uploadedBy: "demo-user"
+        description: "Family portrait from holiday gathering"
+        tags: ["family", "portrait", "holiday"]
+        isPublic: false
+        downloadCount: 15
+      }
+      {
+        name: "logo_design.svg"
+        storagePath: "files/demo-user/logo_design.svg"
+        mimeType: "image/svg+xml"
+        size: 12800
+        uploadedBy: "demo-user"
+        description: "Company logo design vector file"
+        tags: ["design", "logo", "vector"]
+        isPublic: true
+        downloadCount: 45
+      }
+
+      # Videos
+      {
+        name: "presentation_recording.mp4"
+        storagePath: "files/demo-user/presentation_recording.mp4"
+        mimeType: "video/mp4"
+        size: 157286400
+        uploadedBy: "demo-user"
+        description: "Recording of Q4 presentation"
+        tags: ["presentation", "work", "video"]
+        isPublic: false
+        downloadCount: 7
+      }
+      {
+        name: "tutorial_demo.webm"
+        storagePath: "files/demo-user/tutorial_demo.webm"
+        mimeType: "video/webm"
+        size: 52428800
+        uploadedBy: "demo-user"
+        description: "Product tutorial demonstration video"
+        tags: ["tutorial", "demo", "training"]
+        isPublic: true
+        downloadCount: 89
+      }
+
+      # Music
+      {
+        name: "background_music.mp3"
+        storagePath: "files/demo-user/background_music.mp3"
+        mimeType: "audio/mpeg"
+        size: 8388608
+        uploadedBy: "demo-user"
+        description: "Royalty-free background music track"
+        tags: ["music", "audio", "background"]
+        isPublic: true
+        downloadCount: 34
+      }
+      {
+        name: "podcast_episode_12.m4a"
+        storagePath: "files/demo-user/podcast_episode_12.m4a"
+        mimeType: "audio/mp4"
+        size: 31457280
+        uploadedBy: "demo-user"
+        description: "Podcast episode 12 - Tech trends"
+        tags: ["podcast", "audio", "tech"]
+        isPublic: true
+        downloadCount: 156
+      }
+
+      # Projects
+      {
+        name: "source_code.zip"
+        storagePath: "files/demo-user/source_code.zip"
+        mimeType: "application/zip"
+        size: 15728640
+        uploadedBy: "demo-user"
+        description: "Project source code archive"
+        tags: ["code", "project", "archive"]
+        isPublic: false
+        downloadCount: 3
+      }
+      {
+        name: "design_mockups.fig"
+        storagePath: "files/demo-user/design_mockups.fig"
+        mimeType: "application/octet-stream"
+        size: 6291456
+        uploadedBy: "demo-user"
+        description: "UI/UX design mockups in Figma format"
+        tags: ["design", "mockup", "ui"]
+        isPublic: false
+        downloadCount: 18
+      }
+      {
+        name: "meeting_notes.txt"
+        storagePath: "files/demo-user/meeting_notes.txt"
+        mimeType: "text/plain"
+        size: 4096
+        uploadedBy: "demo-user"
+        description: "Notes from weekly team meeting"
+        tags: ["notes", "meeting", "team"]
+        isPublic: false
+        downloadCount: 2
+      }
+
+      # Root level files (no folder)
+      {
+        name: "README.md"
+        storagePath: "files/demo-user/README.md"
+        mimeType: "text/markdown"
+        size: 2048
+        uploadedBy: "demo-user"
+        description: "Project readme file"
+        tags: ["readme", "documentation"]
+        isPublic: true
+        downloadCount: 67
+      }
+      {
+        name: "setup_instructions.pdf"
+        storagePath: "files/demo-user/setup_instructions.pdf"
+        mimeType: "application/pdf"
+        size: 819200
+        uploadedBy: "demo-user"
+        description: "Setup and installation instructions"
+        tags: ["instructions", "setup", "guide"]
+        isPublic: true
+        downloadCount: 42
+      }
+    ]
+  )
+}
