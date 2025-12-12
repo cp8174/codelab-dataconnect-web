@@ -16,7 +16,7 @@ export interface Actor_Key {
 }
 
 export interface ArchiveFileData {
-  file_update?: File_Key | null;
+  file_updateMany: number;
 }
 
 export interface ArchiveFileVariables {
@@ -58,7 +58,7 @@ export interface CreateFolderVariables {
 }
 
 export interface DeleteFileData {
-  file_delete?: File_Key | null;
+  file_deleteMany: number;
 }
 
 export interface DeleteFileVariables {
@@ -66,7 +66,7 @@ export interface DeleteFileVariables {
 }
 
 export interface DeleteFolderData {
-  folder_delete?: Folder_Key | null;
+  folder_deleteMany: number;
 }
 
 export interface DeleteFolderVariables {
@@ -102,7 +102,7 @@ export interface GetArchivedFilesCountData {
 }
 
 export interface GetFileData {
-  file?: {
+  files: ({
     id: UUIDString;
     name: string;
     storagePath: string;
@@ -120,7 +120,7 @@ export interface GetFileData {
       tags?: string[] | null;
       isPublic?: boolean | null;
       downloadCount?: number | null;
-  } & File_Key;
+  } & File_Key)[];
 }
 
 export interface GetFileVariables {
@@ -128,7 +128,7 @@ export interface GetFileVariables {
 }
 
 export interface GetFolderData {
-  folder?: {
+  folders: ({
     id: UUIDString;
     name: string;
     parentFolderId?: UUIDString | null;
@@ -140,7 +140,7 @@ export interface GetFolderData {
       createdAt: TimestampString;
       description?: string | null;
       color?: string | null;
-  } & Folder_Key;
+  } & Folder_Key)[];
 }
 
 export interface GetFolderVariables {
@@ -174,7 +174,7 @@ export interface GetUserStorageStatsData {
 }
 
 export interface IncrementDownloadCountData {
-  file_update?: File_Key | null;
+  file_updateMany: number;
 }
 
 export interface IncrementDownloadCountVariables {
@@ -269,7 +269,7 @@ export interface Movie_Key {
 }
 
 export interface RestoreFileData {
-  file_update?: File_Key | null;
+  file_updateMany: number;
 }
 
 export interface RestoreFileVariables {
@@ -303,7 +303,7 @@ export interface SearchFilesVariables {
 }
 
 export interface UpdateFileData {
-  file_update?: File_Key | null;
+  file_updateMany: number;
 }
 
 export interface UpdateFileVariables {
@@ -316,7 +316,7 @@ export interface UpdateFileVariables {
 }
 
 export interface UpdateFolderData {
-  folder_update?: Folder_Key | null;
+  folder_updateMany: number;
 }
 
 export interface UpdateFolderVariables {
@@ -330,126 +330,6 @@ export interface User_Key {
   id: string;
   __typename?: 'User_Key';
 }
-
-interface ListFilesRef {
-  /* Allow users to create refs without passing in DataConnect */
-  (vars?: ListFilesVariables): QueryRef<ListFilesData, ListFilesVariables>;
-  /* Allow users to pass in custom DataConnect instances */
-  (dc: DataConnect, vars?: ListFilesVariables): QueryRef<ListFilesData, ListFilesVariables>;
-  operationName: string;
-}
-export const listFilesRef: ListFilesRef;
-
-export function listFiles(vars?: ListFilesVariables): QueryPromise<ListFilesData, ListFilesVariables>;
-export function listFiles(dc: DataConnect, vars?: ListFilesVariables): QueryPromise<ListFilesData, ListFilesVariables>;
-
-interface ListFilesByUserRef {
-  /* Allow users to create refs without passing in DataConnect */
-  (): QueryRef<ListFilesByUserData, undefined>;
-  /* Allow users to pass in custom DataConnect instances */
-  (dc: DataConnect): QueryRef<ListFilesByUserData, undefined>;
-  operationName: string;
-}
-export const listFilesByUserRef: ListFilesByUserRef;
-
-export function listFilesByUser(): QueryPromise<ListFilesByUserData, undefined>;
-export function listFilesByUser(dc: DataConnect): QueryPromise<ListFilesByUserData, undefined>;
-
-interface GetFileRef {
-  /* Allow users to create refs without passing in DataConnect */
-  (vars: GetFileVariables): QueryRef<GetFileData, GetFileVariables>;
-  /* Allow users to pass in custom DataConnect instances */
-  (dc: DataConnect, vars: GetFileVariables): QueryRef<GetFileData, GetFileVariables>;
-  operationName: string;
-}
-export const getFileRef: GetFileRef;
-
-export function getFile(vars: GetFileVariables): QueryPromise<GetFileData, GetFileVariables>;
-export function getFile(dc: DataConnect, vars: GetFileVariables): QueryPromise<GetFileData, GetFileVariables>;
-
-interface ListFoldersRef {
-  /* Allow users to create refs without passing in DataConnect */
-  (vars?: ListFoldersVariables): QueryRef<ListFoldersData, ListFoldersVariables>;
-  /* Allow users to pass in custom DataConnect instances */
-  (dc: DataConnect, vars?: ListFoldersVariables): QueryRef<ListFoldersData, ListFoldersVariables>;
-  operationName: string;
-}
-export const listFoldersRef: ListFoldersRef;
-
-export function listFolders(vars?: ListFoldersVariables): QueryPromise<ListFoldersData, ListFoldersVariables>;
-export function listFolders(dc: DataConnect, vars?: ListFoldersVariables): QueryPromise<ListFoldersData, ListFoldersVariables>;
-
-interface GetFolderRef {
-  /* Allow users to create refs without passing in DataConnect */
-  (vars: GetFolderVariables): QueryRef<GetFolderData, GetFolderVariables>;
-  /* Allow users to pass in custom DataConnect instances */
-  (dc: DataConnect, vars: GetFolderVariables): QueryRef<GetFolderData, GetFolderVariables>;
-  operationName: string;
-}
-export const getFolderRef: GetFolderRef;
-
-export function getFolder(vars: GetFolderVariables): QueryPromise<GetFolderData, GetFolderVariables>;
-export function getFolder(dc: DataConnect, vars: GetFolderVariables): QueryPromise<GetFolderData, GetFolderVariables>;
-
-interface SearchFilesRef {
-  /* Allow users to create refs without passing in DataConnect */
-  (vars: SearchFilesVariables): QueryRef<SearchFilesData, SearchFilesVariables>;
-  /* Allow users to pass in custom DataConnect instances */
-  (dc: DataConnect, vars: SearchFilesVariables): QueryRef<SearchFilesData, SearchFilesVariables>;
-  operationName: string;
-}
-export const searchFilesRef: SearchFilesRef;
-
-export function searchFiles(vars: SearchFilesVariables): QueryPromise<SearchFilesData, SearchFilesVariables>;
-export function searchFiles(dc: DataConnect, vars: SearchFilesVariables): QueryPromise<SearchFilesData, SearchFilesVariables>;
-
-interface GetRecentFilesRef {
-  /* Allow users to create refs without passing in DataConnect */
-  (vars?: GetRecentFilesVariables): QueryRef<GetRecentFilesData, GetRecentFilesVariables>;
-  /* Allow users to pass in custom DataConnect instances */
-  (dc: DataConnect, vars?: GetRecentFilesVariables): QueryRef<GetRecentFilesData, GetRecentFilesVariables>;
-  operationName: string;
-}
-export const getRecentFilesRef: GetRecentFilesRef;
-
-export function getRecentFiles(vars?: GetRecentFilesVariables): QueryPromise<GetRecentFilesData, GetRecentFilesVariables>;
-export function getRecentFiles(dc: DataConnect, vars?: GetRecentFilesVariables): QueryPromise<GetRecentFilesData, GetRecentFilesVariables>;
-
-interface GetUserStorageStatsRef {
-  /* Allow users to create refs without passing in DataConnect */
-  (): QueryRef<GetUserStorageStatsData, undefined>;
-  /* Allow users to pass in custom DataConnect instances */
-  (dc: DataConnect): QueryRef<GetUserStorageStatsData, undefined>;
-  operationName: string;
-}
-export const getUserStorageStatsRef: GetUserStorageStatsRef;
-
-export function getUserStorageStats(): QueryPromise<GetUserStorageStatsData, undefined>;
-export function getUserStorageStats(dc: DataConnect): QueryPromise<GetUserStorageStatsData, undefined>;
-
-interface ListArchivedFilesRef {
-  /* Allow users to create refs without passing in DataConnect */
-  (): QueryRef<ListArchivedFilesData, undefined>;
-  /* Allow users to pass in custom DataConnect instances */
-  (dc: DataConnect): QueryRef<ListArchivedFilesData, undefined>;
-  operationName: string;
-}
-export const listArchivedFilesRef: ListArchivedFilesRef;
-
-export function listArchivedFiles(): QueryPromise<ListArchivedFilesData, undefined>;
-export function listArchivedFiles(dc: DataConnect): QueryPromise<ListArchivedFilesData, undefined>;
-
-interface GetArchivedFilesCountRef {
-  /* Allow users to create refs without passing in DataConnect */
-  (): QueryRef<GetArchivedFilesCountData, undefined>;
-  /* Allow users to pass in custom DataConnect instances */
-  (dc: DataConnect): QueryRef<GetArchivedFilesCountData, undefined>;
-  operationName: string;
-}
-export const getArchivedFilesCountRef: GetArchivedFilesCountRef;
-
-export function getArchivedFilesCount(): QueryPromise<GetArchivedFilesCountData, undefined>;
-export function getArchivedFilesCount(dc: DataConnect): QueryPromise<GetArchivedFilesCountData, undefined>;
 
 interface CreateFileRef {
   /* Allow users to create refs without passing in DataConnect */
@@ -570,4 +450,124 @@ export const restoreFileRef: RestoreFileRef;
 
 export function restoreFile(vars: RestoreFileVariables): MutationPromise<RestoreFileData, RestoreFileVariables>;
 export function restoreFile(dc: DataConnect, vars: RestoreFileVariables): MutationPromise<RestoreFileData, RestoreFileVariables>;
+
+interface ListFilesRef {
+  /* Allow users to create refs without passing in DataConnect */
+  (vars?: ListFilesVariables): QueryRef<ListFilesData, ListFilesVariables>;
+  /* Allow users to pass in custom DataConnect instances */
+  (dc: DataConnect, vars?: ListFilesVariables): QueryRef<ListFilesData, ListFilesVariables>;
+  operationName: string;
+}
+export const listFilesRef: ListFilesRef;
+
+export function listFiles(vars?: ListFilesVariables): QueryPromise<ListFilesData, ListFilesVariables>;
+export function listFiles(dc: DataConnect, vars?: ListFilesVariables): QueryPromise<ListFilesData, ListFilesVariables>;
+
+interface ListFilesByUserRef {
+  /* Allow users to create refs without passing in DataConnect */
+  (): QueryRef<ListFilesByUserData, undefined>;
+  /* Allow users to pass in custom DataConnect instances */
+  (dc: DataConnect): QueryRef<ListFilesByUserData, undefined>;
+  operationName: string;
+}
+export const listFilesByUserRef: ListFilesByUserRef;
+
+export function listFilesByUser(): QueryPromise<ListFilesByUserData, undefined>;
+export function listFilesByUser(dc: DataConnect): QueryPromise<ListFilesByUserData, undefined>;
+
+interface GetFileRef {
+  /* Allow users to create refs without passing in DataConnect */
+  (vars: GetFileVariables): QueryRef<GetFileData, GetFileVariables>;
+  /* Allow users to pass in custom DataConnect instances */
+  (dc: DataConnect, vars: GetFileVariables): QueryRef<GetFileData, GetFileVariables>;
+  operationName: string;
+}
+export const getFileRef: GetFileRef;
+
+export function getFile(vars: GetFileVariables): QueryPromise<GetFileData, GetFileVariables>;
+export function getFile(dc: DataConnect, vars: GetFileVariables): QueryPromise<GetFileData, GetFileVariables>;
+
+interface ListFoldersRef {
+  /* Allow users to create refs without passing in DataConnect */
+  (vars?: ListFoldersVariables): QueryRef<ListFoldersData, ListFoldersVariables>;
+  /* Allow users to pass in custom DataConnect instances */
+  (dc: DataConnect, vars?: ListFoldersVariables): QueryRef<ListFoldersData, ListFoldersVariables>;
+  operationName: string;
+}
+export const listFoldersRef: ListFoldersRef;
+
+export function listFolders(vars?: ListFoldersVariables): QueryPromise<ListFoldersData, ListFoldersVariables>;
+export function listFolders(dc: DataConnect, vars?: ListFoldersVariables): QueryPromise<ListFoldersData, ListFoldersVariables>;
+
+interface GetFolderRef {
+  /* Allow users to create refs without passing in DataConnect */
+  (vars: GetFolderVariables): QueryRef<GetFolderData, GetFolderVariables>;
+  /* Allow users to pass in custom DataConnect instances */
+  (dc: DataConnect, vars: GetFolderVariables): QueryRef<GetFolderData, GetFolderVariables>;
+  operationName: string;
+}
+export const getFolderRef: GetFolderRef;
+
+export function getFolder(vars: GetFolderVariables): QueryPromise<GetFolderData, GetFolderVariables>;
+export function getFolder(dc: DataConnect, vars: GetFolderVariables): QueryPromise<GetFolderData, GetFolderVariables>;
+
+interface SearchFilesRef {
+  /* Allow users to create refs without passing in DataConnect */
+  (vars: SearchFilesVariables): QueryRef<SearchFilesData, SearchFilesVariables>;
+  /* Allow users to pass in custom DataConnect instances */
+  (dc: DataConnect, vars: SearchFilesVariables): QueryRef<SearchFilesData, SearchFilesVariables>;
+  operationName: string;
+}
+export const searchFilesRef: SearchFilesRef;
+
+export function searchFiles(vars: SearchFilesVariables): QueryPromise<SearchFilesData, SearchFilesVariables>;
+export function searchFiles(dc: DataConnect, vars: SearchFilesVariables): QueryPromise<SearchFilesData, SearchFilesVariables>;
+
+interface GetRecentFilesRef {
+  /* Allow users to create refs without passing in DataConnect */
+  (vars?: GetRecentFilesVariables): QueryRef<GetRecentFilesData, GetRecentFilesVariables>;
+  /* Allow users to pass in custom DataConnect instances */
+  (dc: DataConnect, vars?: GetRecentFilesVariables): QueryRef<GetRecentFilesData, GetRecentFilesVariables>;
+  operationName: string;
+}
+export const getRecentFilesRef: GetRecentFilesRef;
+
+export function getRecentFiles(vars?: GetRecentFilesVariables): QueryPromise<GetRecentFilesData, GetRecentFilesVariables>;
+export function getRecentFiles(dc: DataConnect, vars?: GetRecentFilesVariables): QueryPromise<GetRecentFilesData, GetRecentFilesVariables>;
+
+interface GetUserStorageStatsRef {
+  /* Allow users to create refs without passing in DataConnect */
+  (): QueryRef<GetUserStorageStatsData, undefined>;
+  /* Allow users to pass in custom DataConnect instances */
+  (dc: DataConnect): QueryRef<GetUserStorageStatsData, undefined>;
+  operationName: string;
+}
+export const getUserStorageStatsRef: GetUserStorageStatsRef;
+
+export function getUserStorageStats(): QueryPromise<GetUserStorageStatsData, undefined>;
+export function getUserStorageStats(dc: DataConnect): QueryPromise<GetUserStorageStatsData, undefined>;
+
+interface ListArchivedFilesRef {
+  /* Allow users to create refs without passing in DataConnect */
+  (): QueryRef<ListArchivedFilesData, undefined>;
+  /* Allow users to pass in custom DataConnect instances */
+  (dc: DataConnect): QueryRef<ListArchivedFilesData, undefined>;
+  operationName: string;
+}
+export const listArchivedFilesRef: ListArchivedFilesRef;
+
+export function listArchivedFiles(): QueryPromise<ListArchivedFilesData, undefined>;
+export function listArchivedFiles(dc: DataConnect): QueryPromise<ListArchivedFilesData, undefined>;
+
+interface GetArchivedFilesCountRef {
+  /* Allow users to create refs without passing in DataConnect */
+  (): QueryRef<GetArchivedFilesCountData, undefined>;
+  /* Allow users to pass in custom DataConnect instances */
+  (dc: DataConnect): QueryRef<GetArchivedFilesCountData, undefined>;
+  operationName: string;
+}
+export const getArchivedFilesCountRef: GetArchivedFilesCountRef;
+
+export function getArchivedFilesCount(): QueryPromise<GetArchivedFilesCountData, undefined>;
+export function getArchivedFilesCount(dc: DataConnect): QueryPromise<GetArchivedFilesCountData, undefined>;
 

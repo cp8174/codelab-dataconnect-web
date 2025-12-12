@@ -7,126 +7,6 @@ const connectorConfig = {
 };
 exports.connectorConfig = connectorConfig;
 
-const listFilesRef = (dcOrVars, vars) => {
-  const { dc: dcInstance, vars: inputVars} = validateArgs(connectorConfig, dcOrVars, vars);
-  dcInstance._useGeneratedSdk();
-  return queryRef(dcInstance, 'ListFiles', inputVars);
-}
-listFilesRef.operationName = 'ListFiles';
-exports.listFilesRef = listFilesRef;
-
-exports.listFiles = function listFiles(dcOrVars, vars) {
-  return executeQuery(listFilesRef(dcOrVars, vars));
-};
-
-const listFilesByUserRef = (dc) => {
-  const { dc: dcInstance} = validateArgs(connectorConfig, dc, undefined);
-  dcInstance._useGeneratedSdk();
-  return queryRef(dcInstance, 'ListFilesByUser');
-}
-listFilesByUserRef.operationName = 'ListFilesByUser';
-exports.listFilesByUserRef = listFilesByUserRef;
-
-exports.listFilesByUser = function listFilesByUser(dc) {
-  return executeQuery(listFilesByUserRef(dc));
-};
-
-const getFileRef = (dcOrVars, vars) => {
-  const { dc: dcInstance, vars: inputVars} = validateArgs(connectorConfig, dcOrVars, vars, true);
-  dcInstance._useGeneratedSdk();
-  return queryRef(dcInstance, 'GetFile', inputVars);
-}
-getFileRef.operationName = 'GetFile';
-exports.getFileRef = getFileRef;
-
-exports.getFile = function getFile(dcOrVars, vars) {
-  return executeQuery(getFileRef(dcOrVars, vars));
-};
-
-const listFoldersRef = (dcOrVars, vars) => {
-  const { dc: dcInstance, vars: inputVars} = validateArgs(connectorConfig, dcOrVars, vars);
-  dcInstance._useGeneratedSdk();
-  return queryRef(dcInstance, 'ListFolders', inputVars);
-}
-listFoldersRef.operationName = 'ListFolders';
-exports.listFoldersRef = listFoldersRef;
-
-exports.listFolders = function listFolders(dcOrVars, vars) {
-  return executeQuery(listFoldersRef(dcOrVars, vars));
-};
-
-const getFolderRef = (dcOrVars, vars) => {
-  const { dc: dcInstance, vars: inputVars} = validateArgs(connectorConfig, dcOrVars, vars, true);
-  dcInstance._useGeneratedSdk();
-  return queryRef(dcInstance, 'GetFolder', inputVars);
-}
-getFolderRef.operationName = 'GetFolder';
-exports.getFolderRef = getFolderRef;
-
-exports.getFolder = function getFolder(dcOrVars, vars) {
-  return executeQuery(getFolderRef(dcOrVars, vars));
-};
-
-const searchFilesRef = (dcOrVars, vars) => {
-  const { dc: dcInstance, vars: inputVars} = validateArgs(connectorConfig, dcOrVars, vars, true);
-  dcInstance._useGeneratedSdk();
-  return queryRef(dcInstance, 'SearchFiles', inputVars);
-}
-searchFilesRef.operationName = 'SearchFiles';
-exports.searchFilesRef = searchFilesRef;
-
-exports.searchFiles = function searchFiles(dcOrVars, vars) {
-  return executeQuery(searchFilesRef(dcOrVars, vars));
-};
-
-const getRecentFilesRef = (dcOrVars, vars) => {
-  const { dc: dcInstance, vars: inputVars} = validateArgs(connectorConfig, dcOrVars, vars);
-  dcInstance._useGeneratedSdk();
-  return queryRef(dcInstance, 'GetRecentFiles', inputVars);
-}
-getRecentFilesRef.operationName = 'GetRecentFiles';
-exports.getRecentFilesRef = getRecentFilesRef;
-
-exports.getRecentFiles = function getRecentFiles(dcOrVars, vars) {
-  return executeQuery(getRecentFilesRef(dcOrVars, vars));
-};
-
-const getUserStorageStatsRef = (dc) => {
-  const { dc: dcInstance} = validateArgs(connectorConfig, dc, undefined);
-  dcInstance._useGeneratedSdk();
-  return queryRef(dcInstance, 'GetUserStorageStats');
-}
-getUserStorageStatsRef.operationName = 'GetUserStorageStats';
-exports.getUserStorageStatsRef = getUserStorageStatsRef;
-
-exports.getUserStorageStats = function getUserStorageStats(dc) {
-  return executeQuery(getUserStorageStatsRef(dc));
-};
-
-const listArchivedFilesRef = (dc) => {
-  const { dc: dcInstance} = validateArgs(connectorConfig, dc, undefined);
-  dcInstance._useGeneratedSdk();
-  return queryRef(dcInstance, 'ListArchivedFiles');
-}
-listArchivedFilesRef.operationName = 'ListArchivedFiles';
-exports.listArchivedFilesRef = listArchivedFilesRef;
-
-exports.listArchivedFiles = function listArchivedFiles(dc) {
-  return executeQuery(listArchivedFilesRef(dc));
-};
-
-const getArchivedFilesCountRef = (dc) => {
-  const { dc: dcInstance} = validateArgs(connectorConfig, dc, undefined);
-  dcInstance._useGeneratedSdk();
-  return queryRef(dcInstance, 'GetArchivedFilesCount');
-}
-getArchivedFilesCountRef.operationName = 'GetArchivedFilesCount';
-exports.getArchivedFilesCountRef = getArchivedFilesCountRef;
-
-exports.getArchivedFilesCount = function getArchivedFilesCount(dc) {
-  return executeQuery(getArchivedFilesCountRef(dc));
-};
-
 const createFileRef = (dcOrVars, vars) => {
   const { dc: dcInstance, vars: inputVars} = validateArgs(connectorConfig, dcOrVars, vars, true);
   dcInstance._useGeneratedSdk();
@@ -245,4 +125,124 @@ exports.restoreFileRef = restoreFileRef;
 
 exports.restoreFile = function restoreFile(dcOrVars, vars) {
   return executeMutation(restoreFileRef(dcOrVars, vars));
+};
+
+const listFilesRef = (dcOrVars, vars) => {
+  const { dc: dcInstance, vars: inputVars} = validateArgs(connectorConfig, dcOrVars, vars);
+  dcInstance._useGeneratedSdk();
+  return queryRef(dcInstance, 'ListFiles', inputVars);
+}
+listFilesRef.operationName = 'ListFiles';
+exports.listFilesRef = listFilesRef;
+
+exports.listFiles = function listFiles(dcOrVars, vars) {
+  return executeQuery(listFilesRef(dcOrVars, vars));
+};
+
+const listFilesByUserRef = (dc) => {
+  const { dc: dcInstance} = validateArgs(connectorConfig, dc, undefined);
+  dcInstance._useGeneratedSdk();
+  return queryRef(dcInstance, 'ListFilesByUser');
+}
+listFilesByUserRef.operationName = 'ListFilesByUser';
+exports.listFilesByUserRef = listFilesByUserRef;
+
+exports.listFilesByUser = function listFilesByUser(dc) {
+  return executeQuery(listFilesByUserRef(dc));
+};
+
+const getFileRef = (dcOrVars, vars) => {
+  const { dc: dcInstance, vars: inputVars} = validateArgs(connectorConfig, dcOrVars, vars, true);
+  dcInstance._useGeneratedSdk();
+  return queryRef(dcInstance, 'GetFile', inputVars);
+}
+getFileRef.operationName = 'GetFile';
+exports.getFileRef = getFileRef;
+
+exports.getFile = function getFile(dcOrVars, vars) {
+  return executeQuery(getFileRef(dcOrVars, vars));
+};
+
+const listFoldersRef = (dcOrVars, vars) => {
+  const { dc: dcInstance, vars: inputVars} = validateArgs(connectorConfig, dcOrVars, vars);
+  dcInstance._useGeneratedSdk();
+  return queryRef(dcInstance, 'ListFolders', inputVars);
+}
+listFoldersRef.operationName = 'ListFolders';
+exports.listFoldersRef = listFoldersRef;
+
+exports.listFolders = function listFolders(dcOrVars, vars) {
+  return executeQuery(listFoldersRef(dcOrVars, vars));
+};
+
+const getFolderRef = (dcOrVars, vars) => {
+  const { dc: dcInstance, vars: inputVars} = validateArgs(connectorConfig, dcOrVars, vars, true);
+  dcInstance._useGeneratedSdk();
+  return queryRef(dcInstance, 'GetFolder', inputVars);
+}
+getFolderRef.operationName = 'GetFolder';
+exports.getFolderRef = getFolderRef;
+
+exports.getFolder = function getFolder(dcOrVars, vars) {
+  return executeQuery(getFolderRef(dcOrVars, vars));
+};
+
+const searchFilesRef = (dcOrVars, vars) => {
+  const { dc: dcInstance, vars: inputVars} = validateArgs(connectorConfig, dcOrVars, vars, true);
+  dcInstance._useGeneratedSdk();
+  return queryRef(dcInstance, 'SearchFiles', inputVars);
+}
+searchFilesRef.operationName = 'SearchFiles';
+exports.searchFilesRef = searchFilesRef;
+
+exports.searchFiles = function searchFiles(dcOrVars, vars) {
+  return executeQuery(searchFilesRef(dcOrVars, vars));
+};
+
+const getRecentFilesRef = (dcOrVars, vars) => {
+  const { dc: dcInstance, vars: inputVars} = validateArgs(connectorConfig, dcOrVars, vars);
+  dcInstance._useGeneratedSdk();
+  return queryRef(dcInstance, 'GetRecentFiles', inputVars);
+}
+getRecentFilesRef.operationName = 'GetRecentFiles';
+exports.getRecentFilesRef = getRecentFilesRef;
+
+exports.getRecentFiles = function getRecentFiles(dcOrVars, vars) {
+  return executeQuery(getRecentFilesRef(dcOrVars, vars));
+};
+
+const getUserStorageStatsRef = (dc) => {
+  const { dc: dcInstance} = validateArgs(connectorConfig, dc, undefined);
+  dcInstance._useGeneratedSdk();
+  return queryRef(dcInstance, 'GetUserStorageStats');
+}
+getUserStorageStatsRef.operationName = 'GetUserStorageStats';
+exports.getUserStorageStatsRef = getUserStorageStatsRef;
+
+exports.getUserStorageStats = function getUserStorageStats(dc) {
+  return executeQuery(getUserStorageStatsRef(dc));
+};
+
+const listArchivedFilesRef = (dc) => {
+  const { dc: dcInstance} = validateArgs(connectorConfig, dc, undefined);
+  dcInstance._useGeneratedSdk();
+  return queryRef(dcInstance, 'ListArchivedFiles');
+}
+listArchivedFilesRef.operationName = 'ListArchivedFiles';
+exports.listArchivedFilesRef = listArchivedFilesRef;
+
+exports.listArchivedFiles = function listArchivedFiles(dc) {
+  return executeQuery(listArchivedFilesRef(dc));
+};
+
+const getArchivedFilesCountRef = (dc) => {
+  const { dc: dcInstance} = validateArgs(connectorConfig, dc, undefined);
+  dcInstance._useGeneratedSdk();
+  return queryRef(dcInstance, 'GetArchivedFilesCount');
+}
+getArchivedFilesCountRef.operationName = 'GetArchivedFilesCount';
+exports.getArchivedFilesCountRef = getArchivedFilesCountRef;
+
+exports.getArchivedFilesCount = function getArchivedFilesCount(dc) {
+  return executeQuery(getArchivedFilesCountRef(dc));
 };

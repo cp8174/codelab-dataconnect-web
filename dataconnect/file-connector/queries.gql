@@ -3,8 +3,16 @@
 # ============================================
 
 # List all files (optionally filtered by folder)
-query ListFiles($folderId: UUID) @auth(level: PUBLIC) {
-  files(where: { folderId: { eq: $folderId } }, orderBy: { uploadedAt: DESC }) {
+query ListFiles($folderId: UUID) @auth(level: USER) {
+  files(
+    where: {
+      _and: [
+        { uploadedBy: { eq_expr: "auth.uid" } }
+        { folderId: { eq: $folderId } }
+      ]
+    }
+    orderBy: { uploadedAt: DESC }
+  ) {
     id
     name
     storagePath
@@ -39,8 +47,16 @@ query ListFilesByUser @auth(level: USER) {
 }
 
 # Get a single file by ID
-query GetFile($id: UUID!) @auth(level: PUBLIC) {
-  file(id: $id) {
+query GetFile($id: UUID!) @auth(level: USER) {
+  files(
+    where: {
+      _and: [
+        { id: { eq: $id } }
+        { uploadedBy: { eq_expr: "auth.uid" } }
+      ]
+    }
+    limit: 1
+  ) {
     id
     name
     storagePath
@@ -62,8 +78,16 @@ query GetFile($id: UUID!) @auth(level: PUBLIC) {
 }
 
 # List all folders (optionally filtered by parent folder)
-query ListFolders($parentFolderId: UUID) @auth(level: PUBLIC) {
-  folders(where: { parentFolderId: { eq: $parentFolderId } }, orderBy: { createdAt: DESC }) {
+query ListFolders($parentFolderId: UUID) @auth(level: USER) {
+  folders(
+    where: {
+      _and: [
+        { createdBy: { eq_expr: "auth.uid" } }
+        { parentFolderId: { eq: $parentFolderId } }
+      ]
+    }
+    orderBy: { createdAt: DESC }
+  ) {
     id
     name
     parentFolderId
@@ -75,8 +99,16 @@ query ListFolders($parentFolderId: UUID) @auth(level: PUBLIC) {
 }
 
 # Get a single folder by ID
-query GetFolder($id: UUID!) @auth(level: PUBLIC) {
-  folder(id: $id) {
+query GetFolder($id: UUID!) @auth(level: USER) {
+  folders(
+    where: {
+      _and: [
+        { id: { eq: $id } }
+        { createdBy: { eq_expr: "auth.uid" } }
+      ]
+    }
+    limit: 1
+  ) {
     id
     name
     parentFolderId
@@ -92,8 +124,16 @@ query GetFolder($id: UUID!) @auth(level: PUBLIC) {
 }
 
 # Search files by name
-query SearchFiles($searchTerm: String!) @auth(level: PUBLIC) {
-  files(where: { name: { contains: $searchTerm } }, orderBy: { uploadedAt: DESC }) {
+query SearchFiles($searchTerm: String!) @auth(level: USER) {
+  files(
+    where: {
+      _and: [
+        { uploadedBy: { eq_expr: "auth.uid" } }
+        { name: { contains: $searchTerm } }
+      ]
+    }
+    orderBy: { uploadedAt: DESC }
+  ) {
     id
     name
     storagePath
@@ -109,8 +149,12 @@ query SearchFiles($searchTerm: String!) @auth(level: PUBLIC) {
 }
 
 # Get recent files
-query GetRecentFiles($limit: Int = 20) @auth(level: PUBLIC) {
-  files(orderBy: { uploadedAt: DESC }, limit: $limit) {
+query GetRecentFiles($limit: Int = 20) @auth(level: USER) {
+  files(
+    where: { uploadedBy: { eq_expr: "auth.uid" } }
+    orderBy: { uploadedAt: DESC }
+    limit: $limit
+  ) {
     id
     name
     storagePath

@@ -30,7 +30,7 @@
 # Above query won't sort the movies
 
 # List subset of fields for movies - sorted by release year
-query ListMovies($orderByReleaseYear: OrderDirection, $limit: Int) @auth(level: PUBLIC) {
+query ListMovies($orderByReleaseYear: OrderDirection, $limit: Int) @auth(level: PUBLIC, insecureReason: "Movie catalog is publicly browsable") {
   movies(
     orderBy: { releaseYear: $orderByReleaseYear }
     limit: $limit
@@ -47,7 +47,7 @@ query ListMovies($orderByReleaseYear: OrderDirection, $limit: Int) @auth(level: 
 }
 
 # List subset of fields for movies - sorted by rating
-query ListMoviesByRating($orderByRating: OrderDirection, $limit: Int) @auth(level: PUBLIC) {
+query ListMoviesByRating($orderByRating: OrderDirection, $limit: Int) @auth(level: PUBLIC, insecureReason: "Movie catalog is publicly browsable") {
   movies(
     orderBy: { rating: $orderByRating }
     limit: $limit
@@ -63,7 +63,7 @@ query ListMoviesByRating($orderByRating: OrderDirection, $limit: Int) @auth(leve
   }
 }
 # Get movie by id
-query GetMovieById($id: UUID!) @auth(level: PUBLIC) {
+query GetMovieById($id: UUID!) @auth(level: PUBLIC, insecureReason: "Movie details are publicly viewable") {
 movie(id: $id) {
     id
     title
@@ -102,7 +102,7 @@ movie(id: $id) {
 }
 
 # Get actor by id
-query GetActorById($id: UUID!) @auth(level: PUBLIC) {
+query GetActorById($id: UUID!) @auth(level: PUBLIC, insecureReason: "Actor information is publicly viewable") {
   actor(id: $id) {
     id
     name
@@ -176,7 +176,7 @@ query SearchAll(
   $minRating: Float!
   $maxRating: Float!
   $genre: String!
-) @auth(level: PUBLIC) {
+) @auth(level: PUBLIC, insecureReason: "Movie search is publicly available") {
   moviesMatchingTitle: movies(
     where: {
       _and: [

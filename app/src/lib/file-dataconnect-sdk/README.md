@@ -348,7 +348,7 @@ Recall that executing the `GetFile` query returns a `QueryPromise` that resolves
 The `data` property is an object of type `GetFileData`, which is defined in [file-dataconnect-sdk/index.d.ts](./index.d.ts). It has the following fields:
 ```typescript
 export interface GetFileData {
-  file?: {
+  files: ({
     id: UUIDString;
     name: string;
     storagePath: string;
@@ -366,7 +366,7 @@ export interface GetFileData {
       tags?: string[] | null;
       isPublic?: boolean | null;
       downloadCount?: number | null;
-  } & File_Key;
+  } & File_Key)[];
 }
 ```
 ### Using `GetFile`'s action shortcut function
@@ -390,12 +390,12 @@ const { data } = await getFile({ id: ..., });
 const dataConnect = getDataConnect(connectorConfig);
 const { data } = await getFile(dataConnect, getFileVars);
 
-console.log(data.file);
+console.log(data.files);
 
 // Or, you can use the `Promise` API.
 getFile(getFileVars).then((response) => {
   const data = response.data;
-  console.log(data.file);
+  console.log(data.files);
 });
 ```
 
@@ -423,12 +423,12 @@ const ref = getFileRef(dataConnect, getFileVars);
 // You can use the `await` keyword to wait for the promise to resolve.
 const { data } = await executeQuery(ref);
 
-console.log(data.file);
+console.log(data.files);
 
 // Or, you can use the `Promise` API.
 executeQuery(ref).then((response) => {
   const data = response.data;
-  console.log(data.file);
+  console.log(data.files);
 });
 ```
 
@@ -596,7 +596,7 @@ Recall that executing the `GetFolder` query returns a `QueryPromise` that resolv
 The `data` property is an object of type `GetFolderData`, which is defined in [file-dataconnect-sdk/index.d.ts](./index.d.ts). It has the following fields:
 ```typescript
 export interface GetFolderData {
-  folder?: {
+  folders: ({
     id: UUIDString;
     name: string;
     parentFolderId?: UUIDString | null;
@@ -608,7 +608,7 @@ export interface GetFolderData {
       createdAt: TimestampString;
       description?: string | null;
       color?: string | null;
-  } & Folder_Key;
+  } & Folder_Key)[];
 }
 ```
 ### Using `GetFolder`'s action shortcut function
@@ -632,12 +632,12 @@ const { data } = await getFolder({ id: ..., });
 const dataConnect = getDataConnect(connectorConfig);
 const { data } = await getFolder(dataConnect, getFolderVars);
 
-console.log(data.folder);
+console.log(data.folders);
 
 // Or, you can use the `Promise` API.
 getFolder(getFolderVars).then((response) => {
   const data = response.data;
-  console.log(data.folder);
+  console.log(data.folders);
 });
 ```
 
@@ -665,12 +665,12 @@ const ref = getFolderRef(dataConnect, getFolderVars);
 // You can use the `await` keyword to wait for the promise to resolve.
 const { data } = await executeQuery(ref);
 
-console.log(data.folder);
+console.log(data.folders);
 
 // Or, you can use the `Promise` API.
 executeQuery(ref).then((response) => {
   const data = response.data;
-  console.log(data.folder);
+  console.log(data.folders);
 });
 ```
 
@@ -1402,7 +1402,7 @@ Recall that executing the `UpdateFile` mutation returns a `MutationPromise` that
 The `data` property is an object of type `UpdateFileData`, which is defined in [file-dataconnect-sdk/index.d.ts](./index.d.ts). It has the following fields:
 ```typescript
 export interface UpdateFileData {
-  file_update?: File_Key | null;
+  file_updateMany: number;
 }
 ```
 ### Using `UpdateFile`'s action shortcut function
@@ -1431,12 +1431,12 @@ const { data } = await updateFile({ id: ..., name: ..., description: ..., tags: 
 const dataConnect = getDataConnect(connectorConfig);
 const { data } = await updateFile(dataConnect, updateFileVars);
 
-console.log(data.file_update);
+console.log(data.file_updateMany);
 
 // Or, you can use the `Promise` API.
 updateFile(updateFileVars).then((response) => {
   const data = response.data;
-  console.log(data.file_update);
+  console.log(data.file_updateMany);
 });
 ```
 
@@ -1469,12 +1469,12 @@ const ref = updateFileRef(dataConnect, updateFileVars);
 // You can use the `await` keyword to wait for the promise to resolve.
 const { data } = await executeMutation(ref);
 
-console.log(data.file_update);
+console.log(data.file_updateMany);
 
 // Or, you can use the `Promise` API.
 executeMutation(ref).then((response) => {
   const data = response.data;
-  console.log(data.file_update);
+  console.log(data.file_updateMany);
 });
 ```
 
@@ -1521,7 +1521,7 @@ Recall that executing the `DeleteFile` mutation returns a `MutationPromise` that
 The `data` property is an object of type `DeleteFileData`, which is defined in [file-dataconnect-sdk/index.d.ts](./index.d.ts). It has the following fields:
 ```typescript
 export interface DeleteFileData {
-  file_delete?: File_Key | null;
+  file_deleteMany: number;
 }
 ```
 ### Using `DeleteFile`'s action shortcut function
@@ -1545,12 +1545,12 @@ const { data } = await deleteFile({ id: ..., });
 const dataConnect = getDataConnect(connectorConfig);
 const { data } = await deleteFile(dataConnect, deleteFileVars);
 
-console.log(data.file_delete);
+console.log(data.file_deleteMany);
 
 // Or, you can use the `Promise` API.
 deleteFile(deleteFileVars).then((response) => {
   const data = response.data;
-  console.log(data.file_delete);
+  console.log(data.file_deleteMany);
 });
 ```
 
@@ -1578,12 +1578,12 @@ const ref = deleteFileRef(dataConnect, deleteFileVars);
 // You can use the `await` keyword to wait for the promise to resolve.
 const { data } = await executeMutation(ref);
 
-console.log(data.file_delete);
+console.log(data.file_deleteMany);
 
 // Or, you can use the `Promise` API.
 executeMutation(ref).then((response) => {
   const data = response.data;
-  console.log(data.file_delete);
+  console.log(data.file_deleteMany);
 });
 ```
 
@@ -1631,7 +1631,7 @@ Recall that executing the `IncrementDownloadCount` mutation returns a `MutationP
 The `data` property is an object of type `IncrementDownloadCountData`, which is defined in [file-dataconnect-sdk/index.d.ts](./index.d.ts). It has the following fields:
 ```typescript
 export interface IncrementDownloadCountData {
-  file_update?: File_Key | null;
+  file_updateMany: number;
 }
 ```
 ### Using `IncrementDownloadCount`'s action shortcut function
@@ -1656,12 +1656,12 @@ const { data } = await incrementDownloadCount({ id: ..., newCount: ..., });
 const dataConnect = getDataConnect(connectorConfig);
 const { data } = await incrementDownloadCount(dataConnect, incrementDownloadCountVars);
 
-console.log(data.file_update);
+console.log(data.file_updateMany);
 
 // Or, you can use the `Promise` API.
 incrementDownloadCount(incrementDownloadCountVars).then((response) => {
   const data = response.data;
-  console.log(data.file_update);
+  console.log(data.file_updateMany);
 });
 ```
 
@@ -1690,12 +1690,12 @@ const ref = incrementDownloadCountRef(dataConnect, incrementDownloadCountVars);
 // You can use the `await` keyword to wait for the promise to resolve.
 const { data } = await executeMutation(ref);
 
-console.log(data.file_update);
+console.log(data.file_updateMany);
 
 // Or, you can use the `Promise` API.
 executeMutation(ref).then((response) => {
   const data = response.data;
-  console.log(data.file_update);
+  console.log(data.file_updateMany);
 });
 ```
 
@@ -1863,7 +1863,7 @@ Recall that executing the `UpdateFolder` mutation returns a `MutationPromise` th
 The `data` property is an object of type `UpdateFolderData`, which is defined in [file-dataconnect-sdk/index.d.ts](./index.d.ts). It has the following fields:
 ```typescript
 export interface UpdateFolderData {
-  folder_update?: Folder_Key | null;
+  folder_updateMany: number;
 }
 ```
 ### Using `UpdateFolder`'s action shortcut function
@@ -1890,12 +1890,12 @@ const { data } = await updateFolder({ id: ..., name: ..., description: ..., colo
 const dataConnect = getDataConnect(connectorConfig);
 const { data } = await updateFolder(dataConnect, updateFolderVars);
 
-console.log(data.folder_update);
+console.log(data.folder_updateMany);
 
 // Or, you can use the `Promise` API.
 updateFolder(updateFolderVars).then((response) => {
   const data = response.data;
-  console.log(data.folder_update);
+  console.log(data.folder_updateMany);
 });
 ```
 
@@ -1926,12 +1926,12 @@ const ref = updateFolderRef(dataConnect, updateFolderVars);
 // You can use the `await` keyword to wait for the promise to resolve.
 const { data } = await executeMutation(ref);
 
-console.log(data.folder_update);
+console.log(data.folder_updateMany);
 
 // Or, you can use the `Promise` API.
 executeMutation(ref).then((response) => {
   const data = response.data;
-  console.log(data.folder_update);
+  console.log(data.folder_updateMany);
 });
 ```
 
@@ -1978,7 +1978,7 @@ Recall that executing the `DeleteFolder` mutation returns a `MutationPromise` th
 The `data` property is an object of type `DeleteFolderData`, which is defined in [file-dataconnect-sdk/index.d.ts](./index.d.ts). It has the following fields:
 ```typescript
 export interface DeleteFolderData {
-  folder_delete?: Folder_Key | null;
+  folder_deleteMany: number;
 }
 ```
 ### Using `DeleteFolder`'s action shortcut function
@@ -2002,12 +2002,12 @@ const { data } = await deleteFolder({ id: ..., });
 const dataConnect = getDataConnect(connectorConfig);
 const { data } = await deleteFolder(dataConnect, deleteFolderVars);
 
-console.log(data.folder_delete);
+console.log(data.folder_deleteMany);
 
 // Or, you can use the `Promise` API.
 deleteFolder(deleteFolderVars).then((response) => {
   const data = response.data;
-  console.log(data.folder_delete);
+  console.log(data.folder_deleteMany);
 });
 ```
 
@@ -2035,12 +2035,12 @@ const ref = deleteFolderRef(dataConnect, deleteFolderVars);
 // You can use the `await` keyword to wait for the promise to resolve.
 const { data } = await executeMutation(ref);
 
-console.log(data.folder_delete);
+console.log(data.folder_deleteMany);
 
 // Or, you can use the `Promise` API.
 executeMutation(ref).then((response) => {
   const data = response.data;
-  console.log(data.folder_delete);
+  console.log(data.folder_deleteMany);
 });
 ```
 
@@ -2087,7 +2087,7 @@ Recall that executing the `ArchiveFile` mutation returns a `MutationPromise` tha
 The `data` property is an object of type `ArchiveFileData`, which is defined in [file-dataconnect-sdk/index.d.ts](./index.d.ts). It has the following fields:
 ```typescript
 export interface ArchiveFileData {
-  file_update?: File_Key | null;
+  file_updateMany: number;
 }
 ```
 ### Using `ArchiveFile`'s action shortcut function
@@ -2111,12 +2111,12 @@ const { data } = await archiveFile({ id: ..., });
 const dataConnect = getDataConnect(connectorConfig);
 const { data } = await archiveFile(dataConnect, archiveFileVars);
 
-console.log(data.file_update);
+console.log(data.file_updateMany);
 
 // Or, you can use the `Promise` API.
 archiveFile(archiveFileVars).then((response) => {
   const data = response.data;
-  console.log(data.file_update);
+  console.log(data.file_updateMany);
 });
 ```
 
@@ -2144,12 +2144,12 @@ const ref = archiveFileRef(dataConnect, archiveFileVars);
 // You can use the `await` keyword to wait for the promise to resolve.
 const { data } = await executeMutation(ref);
 
-console.log(data.file_update);
+console.log(data.file_updateMany);
 
 // Or, you can use the `Promise` API.
 executeMutation(ref).then((response) => {
   const data = response.data;
-  console.log(data.file_update);
+  console.log(data.file_updateMany);
 });
 ```
 
@@ -2305,7 +2305,7 @@ Recall that executing the `RestoreFile` mutation returns a `MutationPromise` tha
 The `data` property is an object of type `RestoreFileData`, which is defined in [file-dataconnect-sdk/index.d.ts](./index.d.ts). It has the following fields:
 ```typescript
 export interface RestoreFileData {
-  file_update?: File_Key | null;
+  file_updateMany: number;
 }
 ```
 ### Using `RestoreFile`'s action shortcut function
@@ -2329,12 +2329,12 @@ const { data } = await restoreFile({ id: ..., });
 const dataConnect = getDataConnect(connectorConfig);
 const { data } = await restoreFile(dataConnect, restoreFileVars);
 
-console.log(data.file_update);
+console.log(data.file_updateMany);
 
 // Or, you can use the `Promise` API.
 restoreFile(restoreFileVars).then((response) => {
   const data = response.data;
-  console.log(data.file_update);
+  console.log(data.file_updateMany);
 });
 ```
 
@@ -2362,12 +2362,12 @@ const ref = restoreFileRef(dataConnect, restoreFileVars);
 // You can use the `await` keyword to wait for the promise to resolve.
 const { data } = await executeMutation(ref);
 
-console.log(data.file_update);
+console.log(data.file_updateMany);
 
 // Or, you can use the `Promise` API.
 executeMutation(ref).then((response) => {
   const data = response.data;
-  console.log(data.file_update);
+  console.log(data.file_updateMany);
 });
 ```
 

@@ -37,8 +37,13 @@ mutation UpdateFile(
   $isPublic: Boolean
   $folderId: UUID
 ) @auth(level: USER) {
-  file_update(
-    id: $id
+  file_updateMany(
+    where: {
+      _and: [
+        { id: { eq: $id } }
+        { uploadedBy: { eq_expr: "auth.uid" } }
+      ]
+    }
     data: {
       name: $name
       description: $description
@@ -51,13 +56,25 @@ mutation UpdateFile(
 
 # Delete a file entry
 mutation DeleteFile($id: UUID!) @auth(level: USER) {
-  file_delete(id: $id)
+  file_deleteMany(
+    where: {
+      _and: [
+        { id: { eq: $id } }
+        { uploadedBy: { eq_expr: "auth.uid" } }
+      ]
+    }
+  )
 }
 
 # Increment download count
 mutation IncrementDownloadCount($id: UUID!, $newCount: Int!) @auth(level: USER) {
-  file_update(
-    id: $id
+  file_updateMany(
+    where: {
+      _and: [
+        { id: { eq: $id } }
+        { uploadedBy: { eq_expr: "auth.uid" } }
+      ]
+    }
     data: { downloadCount: $newCount }
   )
 }
@@ -91,8 +108,13 @@ mutation UpdateFolder(
   $description: String
   $color: String
 ) @auth(level: USER) {
-  folder_update(
-    id: $id
+  folder_updateMany(
+    where: {
+      _and: [
+        { id: { eq: $id } }
+        { createdBy: { eq_expr: "auth.uid" } }
+      ]
+    }
     data: {
       name: $name
       description: $description
@@ -103,7 +125,14 @@ mutation UpdateFolder(
 
 # Delete a folder
 mutation DeleteFolder($id: UUID!) @auth(level: USER) {
-  folder_delete(id: $id)
+  folder_deleteMany(
+    where: {
+      _and: [
+        { id: { eq: $id } }
+        { createdBy: { eq_expr: "auth.uid" } }
+      ]
+    }
+  )
 }
 
 # ============================================
@@ -112,8 +141,13 @@ mutation DeleteFolder($id: UUID!) @auth(level: USER) {
 
 # Archive a file
 mutation ArchiveFile($id: UUID!) @auth(level: USER) {
-  file_update(
-    id: $id
+  file_updateMany(
+    where: {
+      _and: [
+        { id: { eq: $id } }
+        { uploadedBy: { eq_expr: "auth.uid" } }
+      ]
+    }
     data: {
       isArchived: true
       archivedAt_time: { now: true }
@@ -139,8 +173,13 @@ mutation ArchiveOldFiles($olderThan: Timestamp!) @auth(level: NO_ACCESS) {
 
 # Restore archived file
 mutation RestoreFile($id: UUID!) @auth(level: USER) {
-  file_update(
-    id: $id
+  file_updateMany(
+    where: {
+      _and: [
+        { id: { eq: $id } }
+        { uploadedBy: { eq_expr: "auth.uid" } }
+      ]
+    }
     data: {
       isArchived: false
       archivedAt: null
