@@ -14,38 +14,38 @@ If a user is not using a supported framework, they can use the generated SDK dir
 Here's an example of how to use it with the first 5 operations:
 
 ```js
-import { createFile, updateFile, deleteFile, incrementDownloadCount, createFolder, updateFolder, deleteFolder, archiveFile, archiveOldFiles, restoreFile } from '@file/dataconnect';
+import { listFiles, listFilesByUser, getFile, listFolders, getFolder, searchFiles, getRecentFiles, getUserStorageStats, listArchivedFiles, getArchivedFilesCount } from '@file/dataconnect';
 
 
-// Operation CreateFile:  For variables, look at type CreateFileVars in ../index.d.ts
-const { data } = await CreateFile(dataConnect, createFileVars);
+// Operation ListFiles:  For variables, look at type ListFilesVars in ../index.d.ts
+const { data } = await ListFiles(dataConnect, listFilesVars);
 
-// Operation UpdateFile:  For variables, look at type UpdateFileVars in ../index.d.ts
-const { data } = await UpdateFile(dataConnect, updateFileVars);
+// Operation ListFilesByUser: 
+const { data } = await ListFilesByUser(dataConnect);
 
-// Operation DeleteFile:  For variables, look at type DeleteFileVars in ../index.d.ts
-const { data } = await DeleteFile(dataConnect, deleteFileVars);
+// Operation GetFile:  For variables, look at type GetFileVars in ../index.d.ts
+const { data } = await GetFile(dataConnect, getFileVars);
 
-// Operation IncrementDownloadCount:  For variables, look at type IncrementDownloadCountVars in ../index.d.ts
-const { data } = await IncrementDownloadCount(dataConnect, incrementDownloadCountVars);
+// Operation ListFolders:  For variables, look at type ListFoldersVars in ../index.d.ts
+const { data } = await ListFolders(dataConnect, listFoldersVars);
 
-// Operation CreateFolder:  For variables, look at type CreateFolderVars in ../index.d.ts
-const { data } = await CreateFolder(dataConnect, createFolderVars);
+// Operation GetFolder:  For variables, look at type GetFolderVars in ../index.d.ts
+const { data } = await GetFolder(dataConnect, getFolderVars);
 
-// Operation UpdateFolder:  For variables, look at type UpdateFolderVars in ../index.d.ts
-const { data } = await UpdateFolder(dataConnect, updateFolderVars);
+// Operation SearchFiles:  For variables, look at type SearchFilesVars in ../index.d.ts
+const { data } = await SearchFiles(dataConnect, searchFilesVars);
 
-// Operation DeleteFolder:  For variables, look at type DeleteFolderVars in ../index.d.ts
-const { data } = await DeleteFolder(dataConnect, deleteFolderVars);
+// Operation GetRecentFiles:  For variables, look at type GetRecentFilesVars in ../index.d.ts
+const { data } = await GetRecentFiles(dataConnect, getRecentFilesVars);
 
-// Operation ArchiveFile:  For variables, look at type ArchiveFileVars in ../index.d.ts
-const { data } = await ArchiveFile(dataConnect, archiveFileVars);
+// Operation GetUserStorageStats: 
+const { data } = await GetUserStorageStats(dataConnect);
 
-// Operation ArchiveOldFiles:  For variables, look at type ArchiveOldFilesVars in ../index.d.ts
-const { data } = await ArchiveOldFiles(dataConnect, archiveOldFilesVars);
+// Operation ListArchivedFiles: 
+const { data } = await ListArchivedFiles(dataConnect);
 
-// Operation RestoreFile:  For variables, look at type RestoreFileVars in ../index.d.ts
-const { data } = await RestoreFile(dataConnect, restoreFileVars);
+// Operation GetArchivedFilesCount: 
+const { data } = await GetArchivedFilesCount(dataConnect);
 
 
 ```

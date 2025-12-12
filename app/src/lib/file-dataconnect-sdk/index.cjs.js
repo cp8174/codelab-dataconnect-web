@@ -7,126 +7,6 @@ const connectorConfig = {
 };
 exports.connectorConfig = connectorConfig;
 
-const createFileRef = (dcOrVars, vars) => {
-  const { dc: dcInstance, vars: inputVars} = validateArgs(connectorConfig, dcOrVars, vars, true);
-  dcInstance._useGeneratedSdk();
-  return mutationRef(dcInstance, 'CreateFile', inputVars);
-}
-createFileRef.operationName = 'CreateFile';
-exports.createFileRef = createFileRef;
-
-exports.createFile = function createFile(dcOrVars, vars) {
-  return executeMutation(createFileRef(dcOrVars, vars));
-};
-
-const updateFileRef = (dcOrVars, vars) => {
-  const { dc: dcInstance, vars: inputVars} = validateArgs(connectorConfig, dcOrVars, vars, true);
-  dcInstance._useGeneratedSdk();
-  return mutationRef(dcInstance, 'UpdateFile', inputVars);
-}
-updateFileRef.operationName = 'UpdateFile';
-exports.updateFileRef = updateFileRef;
-
-exports.updateFile = function updateFile(dcOrVars, vars) {
-  return executeMutation(updateFileRef(dcOrVars, vars));
-};
-
-const deleteFileRef = (dcOrVars, vars) => {
-  const { dc: dcInstance, vars: inputVars} = validateArgs(connectorConfig, dcOrVars, vars, true);
-  dcInstance._useGeneratedSdk();
-  return mutationRef(dcInstance, 'DeleteFile', inputVars);
-}
-deleteFileRef.operationName = 'DeleteFile';
-exports.deleteFileRef = deleteFileRef;
-
-exports.deleteFile = function deleteFile(dcOrVars, vars) {
-  return executeMutation(deleteFileRef(dcOrVars, vars));
-};
-
-const incrementDownloadCountRef = (dcOrVars, vars) => {
-  const { dc: dcInstance, vars: inputVars} = validateArgs(connectorConfig, dcOrVars, vars, true);
-  dcInstance._useGeneratedSdk();
-  return mutationRef(dcInstance, 'IncrementDownloadCount', inputVars);
-}
-incrementDownloadCountRef.operationName = 'IncrementDownloadCount';
-exports.incrementDownloadCountRef = incrementDownloadCountRef;
-
-exports.incrementDownloadCount = function incrementDownloadCount(dcOrVars, vars) {
-  return executeMutation(incrementDownloadCountRef(dcOrVars, vars));
-};
-
-const createFolderRef = (dcOrVars, vars) => {
-  const { dc: dcInstance, vars: inputVars} = validateArgs(connectorConfig, dcOrVars, vars, true);
-  dcInstance._useGeneratedSdk();
-  return mutationRef(dcInstance, 'CreateFolder', inputVars);
-}
-createFolderRef.operationName = 'CreateFolder';
-exports.createFolderRef = createFolderRef;
-
-exports.createFolder = function createFolder(dcOrVars, vars) {
-  return executeMutation(createFolderRef(dcOrVars, vars));
-};
-
-const updateFolderRef = (dcOrVars, vars) => {
-  const { dc: dcInstance, vars: inputVars} = validateArgs(connectorConfig, dcOrVars, vars, true);
-  dcInstance._useGeneratedSdk();
-  return mutationRef(dcInstance, 'UpdateFolder', inputVars);
-}
-updateFolderRef.operationName = 'UpdateFolder';
-exports.updateFolderRef = updateFolderRef;
-
-exports.updateFolder = function updateFolder(dcOrVars, vars) {
-  return executeMutation(updateFolderRef(dcOrVars, vars));
-};
-
-const deleteFolderRef = (dcOrVars, vars) => {
-  const { dc: dcInstance, vars: inputVars} = validateArgs(connectorConfig, dcOrVars, vars, true);
-  dcInstance._useGeneratedSdk();
-  return mutationRef(dcInstance, 'DeleteFolder', inputVars);
-}
-deleteFolderRef.operationName = 'DeleteFolder';
-exports.deleteFolderRef = deleteFolderRef;
-
-exports.deleteFolder = function deleteFolder(dcOrVars, vars) {
-  return executeMutation(deleteFolderRef(dcOrVars, vars));
-};
-
-const archiveFileRef = (dcOrVars, vars) => {
-  const { dc: dcInstance, vars: inputVars} = validateArgs(connectorConfig, dcOrVars, vars, true);
-  dcInstance._useGeneratedSdk();
-  return mutationRef(dcInstance, 'ArchiveFile', inputVars);
-}
-archiveFileRef.operationName = 'ArchiveFile';
-exports.archiveFileRef = archiveFileRef;
-
-exports.archiveFile = function archiveFile(dcOrVars, vars) {
-  return executeMutation(archiveFileRef(dcOrVars, vars));
-};
-
-const archiveOldFilesRef = (dcOrVars, vars) => {
-  const { dc: dcInstance, vars: inputVars} = validateArgs(connectorConfig, dcOrVars, vars, true);
-  dcInstance._useGeneratedSdk();
-  return mutationRef(dcInstance, 'ArchiveOldFiles', inputVars);
-}
-archiveOldFilesRef.operationName = 'ArchiveOldFiles';
-exports.archiveOldFilesRef = archiveOldFilesRef;
-
-exports.archiveOldFiles = function archiveOldFiles(dcOrVars, vars) {
-  return executeMutation(archiveOldFilesRef(dcOrVars, vars));
-};
-
-const restoreFileRef = (dcOrVars, vars) => {
-  const { dc: dcInstance, vars: inputVars} = validateArgs(connectorConfig, dcOrVars, vars, true);
-  dcInstance._useGeneratedSdk();
-  return mutationRef(dcInstance, 'RestoreFile', inputVars);
-}
-restoreFileRef.operationName = 'RestoreFile';
-exports.restoreFileRef = restoreFileRef;
-
-exports.restoreFile = function restoreFile(dcOrVars, vars) {
-  return executeMutation(restoreFileRef(dcOrVars, vars));
-};
-
 const listFilesRef = (dcOrVars, vars) => {
   const { dc: dcInstance, vars: inputVars} = validateArgs(connectorConfig, dcOrVars, vars);
   dcInstance._useGeneratedSdk();
@@ -245,4 +125,124 @@ exports.getArchivedFilesCountRef = getArchivedFilesCountRef;
 
 exports.getArchivedFilesCount = function getArchivedFilesCount(dc) {
   return executeQuery(getArchivedFilesCountRef(dc));
+};
+
+const createFileRef = (dcOrVars, vars) => {
+  const { dc: dcInstance, vars: inputVars} = validateArgs(connectorConfig, dcOrVars, vars, true);
+  dcInstance._useGeneratedSdk();
+  return mutationRef(dcInstance, 'CreateFile', inputVars);
+}
+createFileRef.operationName = 'CreateFile';
+exports.createFileRef = createFileRef;
+
+exports.createFile = function createFile(dcOrVars, vars) {
+  return executeMutation(createFileRef(dcOrVars, vars));
+};
+
+const updateFileRef = (dcOrVars, vars) => {
+  const { dc: dcInstance, vars: inputVars} = validateArgs(connectorConfig, dcOrVars, vars, true);
+  dcInstance._useGeneratedSdk();
+  return mutationRef(dcInstance, 'UpdateFile', inputVars);
+}
+updateFileRef.operationName = 'UpdateFile';
+exports.updateFileRef = updateFileRef;
+
+exports.updateFile = function updateFile(dcOrVars, vars) {
+  return executeMutation(updateFileRef(dcOrVars, vars));
+};
+
+const deleteFileRef = (dcOrVars, vars) => {
+  const { dc: dcInstance, vars: inputVars} = validateArgs(connectorConfig, dcOrVars, vars, true);
+  dcInstance._useGeneratedSdk();
+  return mutationRef(dcInstance, 'DeleteFile', inputVars);
+}
+deleteFileRef.operationName = 'DeleteFile';
+exports.deleteFileRef = deleteFileRef;
+
+exports.deleteFile = function deleteFile(dcOrVars, vars) {
+  return executeMutation(deleteFileRef(dcOrVars, vars));
+};
+
+const incrementDownloadCountRef = (dcOrVars, vars) => {
+  const { dc: dcInstance, vars: inputVars} = validateArgs(connectorConfig, dcOrVars, vars, true);
+  dcInstance._useGeneratedSdk();
+  return mutationRef(dcInstance, 'IncrementDownloadCount', inputVars);
+}
+incrementDownloadCountRef.operationName = 'IncrementDownloadCount';
+exports.incrementDownloadCountRef = incrementDownloadCountRef;
+
+exports.incrementDownloadCount = function incrementDownloadCount(dcOrVars, vars) {
+  return executeMutation(incrementDownloadCountRef(dcOrVars, vars));
+};
+
+const createFolderRef = (dcOrVars, vars) => {
+  const { dc: dcInstance, vars: inputVars} = validateArgs(connectorConfig, dcOrVars, vars, true);
+  dcInstance._useGeneratedSdk();
+  return mutationRef(dcInstance, 'CreateFolder', inputVars);
+}
+createFolderRef.operationName = 'CreateFolder';
+exports.createFolderRef = createFolderRef;
+
+exports.createFolder = function createFolder(dcOrVars, vars) {
+  return executeMutation(createFolderRef(dcOrVars, vars));
+};
+
+const updateFolderRef = (dcOrVars, vars) => {
+  const { dc: dcInstance, vars: inputVars} = validateArgs(connectorConfig, dcOrVars, vars, true);
+  dcInstance._useGeneratedSdk();
+  return mutationRef(dcInstance, 'UpdateFolder', inputVars);
+}
+updateFolderRef.operationName = 'UpdateFolder';
+exports.updateFolderRef = updateFolderRef;
+
+exports.updateFolder = function updateFolder(dcOrVars, vars) {
+  return executeMutation(updateFolderRef(dcOrVars, vars));
+};
+
+const deleteFolderRef = (dcOrVars, vars) => {
+  const { dc: dcInstance, vars: inputVars} = validateArgs(connectorConfig, dcOrVars, vars, true);
+  dcInstance._useGeneratedSdk();
+  return mutationRef(dcInstance, 'DeleteFolder', inputVars);
+}
+deleteFolderRef.operationName = 'DeleteFolder';
+exports.deleteFolderRef = deleteFolderRef;
+
+exports.deleteFolder = function deleteFolder(dcOrVars, vars) {
+  return executeMutation(deleteFolderRef(dcOrVars, vars));
+};
+
+const archiveFileRef = (dcOrVars, vars) => {
+  const { dc: dcInstance, vars: inputVars} = validateArgs(connectorConfig, dcOrVars, vars, true);
+  dcInstance._useGeneratedSdk();
+  return mutationRef(dcInstance, 'ArchiveFile', inputVars);
+}
+archiveFileRef.operationName = 'ArchiveFile';
+exports.archiveFileRef = archiveFileRef;
+
+exports.archiveFile = function archiveFile(dcOrVars, vars) {
+  return executeMutation(archiveFileRef(dcOrVars, vars));
+};
+
+const archiveOldFilesRef = (dcOrVars, vars) => {
+  const { dc: dcInstance, vars: inputVars} = validateArgs(connectorConfig, dcOrVars, vars, true);
+  dcInstance._useGeneratedSdk();
+  return mutationRef(dcInstance, 'ArchiveOldFiles', inputVars);
+}
+archiveOldFilesRef.operationName = 'ArchiveOldFiles';
+exports.archiveOldFilesRef = archiveOldFilesRef;
+
+exports.archiveOldFiles = function archiveOldFiles(dcOrVars, vars) {
+  return executeMutation(archiveOldFilesRef(dcOrVars, vars));
+};
+
+const restoreFileRef = (dcOrVars, vars) => {
+  const { dc: dcInstance, vars: inputVars} = validateArgs(connectorConfig, dcOrVars, vars, true);
+  dcInstance._useGeneratedSdk();
+  return mutationRef(dcInstance, 'RestoreFile', inputVars);
+}
+restoreFileRef.operationName = 'RestoreFile';
+exports.restoreFileRef = restoreFileRef;
+
+exports.restoreFile = function restoreFile(dcOrVars, vars) {
+  return executeMutation(restoreFileRef(dcOrVars, vars));
 };

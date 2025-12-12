@@ -331,126 +331,6 @@ export interface User_Key {
   __typename?: 'User_Key';
 }
 
-interface CreateFileRef {
-  /* Allow users to create refs without passing in DataConnect */
-  (vars: CreateFileVariables): MutationRef<CreateFileData, CreateFileVariables>;
-  /* Allow users to pass in custom DataConnect instances */
-  (dc: DataConnect, vars: CreateFileVariables): MutationRef<CreateFileData, CreateFileVariables>;
-  operationName: string;
-}
-export const createFileRef: CreateFileRef;
-
-export function createFile(vars: CreateFileVariables): MutationPromise<CreateFileData, CreateFileVariables>;
-export function createFile(dc: DataConnect, vars: CreateFileVariables): MutationPromise<CreateFileData, CreateFileVariables>;
-
-interface UpdateFileRef {
-  /* Allow users to create refs without passing in DataConnect */
-  (vars: UpdateFileVariables): MutationRef<UpdateFileData, UpdateFileVariables>;
-  /* Allow users to pass in custom DataConnect instances */
-  (dc: DataConnect, vars: UpdateFileVariables): MutationRef<UpdateFileData, UpdateFileVariables>;
-  operationName: string;
-}
-export const updateFileRef: UpdateFileRef;
-
-export function updateFile(vars: UpdateFileVariables): MutationPromise<UpdateFileData, UpdateFileVariables>;
-export function updateFile(dc: DataConnect, vars: UpdateFileVariables): MutationPromise<UpdateFileData, UpdateFileVariables>;
-
-interface DeleteFileRef {
-  /* Allow users to create refs without passing in DataConnect */
-  (vars: DeleteFileVariables): MutationRef<DeleteFileData, DeleteFileVariables>;
-  /* Allow users to pass in custom DataConnect instances */
-  (dc: DataConnect, vars: DeleteFileVariables): MutationRef<DeleteFileData, DeleteFileVariables>;
-  operationName: string;
-}
-export const deleteFileRef: DeleteFileRef;
-
-export function deleteFile(vars: DeleteFileVariables): MutationPromise<DeleteFileData, DeleteFileVariables>;
-export function deleteFile(dc: DataConnect, vars: DeleteFileVariables): MutationPromise<DeleteFileData, DeleteFileVariables>;
-
-interface IncrementDownloadCountRef {
-  /* Allow users to create refs without passing in DataConnect */
-  (vars: IncrementDownloadCountVariables): MutationRef<IncrementDownloadCountData, IncrementDownloadCountVariables>;
-  /* Allow users to pass in custom DataConnect instances */
-  (dc: DataConnect, vars: IncrementDownloadCountVariables): MutationRef<IncrementDownloadCountData, IncrementDownloadCountVariables>;
-  operationName: string;
-}
-export const incrementDownloadCountRef: IncrementDownloadCountRef;
-
-export function incrementDownloadCount(vars: IncrementDownloadCountVariables): MutationPromise<IncrementDownloadCountData, IncrementDownloadCountVariables>;
-export function incrementDownloadCount(dc: DataConnect, vars: IncrementDownloadCountVariables): MutationPromise<IncrementDownloadCountData, IncrementDownloadCountVariables>;
-
-interface CreateFolderRef {
-  /* Allow users to create refs without passing in DataConnect */
-  (vars: CreateFolderVariables): MutationRef<CreateFolderData, CreateFolderVariables>;
-  /* Allow users to pass in custom DataConnect instances */
-  (dc: DataConnect, vars: CreateFolderVariables): MutationRef<CreateFolderData, CreateFolderVariables>;
-  operationName: string;
-}
-export const createFolderRef: CreateFolderRef;
-
-export function createFolder(vars: CreateFolderVariables): MutationPromise<CreateFolderData, CreateFolderVariables>;
-export function createFolder(dc: DataConnect, vars: CreateFolderVariables): MutationPromise<CreateFolderData, CreateFolderVariables>;
-
-interface UpdateFolderRef {
-  /* Allow users to create refs without passing in DataConnect */
-  (vars: UpdateFolderVariables): MutationRef<UpdateFolderData, UpdateFolderVariables>;
-  /* Allow users to pass in custom DataConnect instances */
-  (dc: DataConnect, vars: UpdateFolderVariables): MutationRef<UpdateFolderData, UpdateFolderVariables>;
-  operationName: string;
-}
-export const updateFolderRef: UpdateFolderRef;
-
-export function updateFolder(vars: UpdateFolderVariables): MutationPromise<UpdateFolderData, UpdateFolderVariables>;
-export function updateFolder(dc: DataConnect, vars: UpdateFolderVariables): MutationPromise<UpdateFolderData, UpdateFolderVariables>;
-
-interface DeleteFolderRef {
-  /* Allow users to create refs without passing in DataConnect */
-  (vars: DeleteFolderVariables): MutationRef<DeleteFolderData, DeleteFolderVariables>;
-  /* Allow users to pass in custom DataConnect instances */
-  (dc: DataConnect, vars: DeleteFolderVariables): MutationRef<DeleteFolderData, DeleteFolderVariables>;
-  operationName: string;
-}
-export const deleteFolderRef: DeleteFolderRef;
-
-export function deleteFolder(vars: DeleteFolderVariables): MutationPromise<DeleteFolderData, DeleteFolderVariables>;
-export function deleteFolder(dc: DataConnect, vars: DeleteFolderVariables): MutationPromise<DeleteFolderData, DeleteFolderVariables>;
-
-interface ArchiveFileRef {
-  /* Allow users to create refs without passing in DataConnect */
-  (vars: ArchiveFileVariables): MutationRef<ArchiveFileData, ArchiveFileVariables>;
-  /* Allow users to pass in custom DataConnect instances */
-  (dc: DataConnect, vars: ArchiveFileVariables): MutationRef<ArchiveFileData, ArchiveFileVariables>;
-  operationName: string;
-}
-export const archiveFileRef: ArchiveFileRef;
-
-export function archiveFile(vars: ArchiveFileVariables): MutationPromise<ArchiveFileData, ArchiveFileVariables>;
-export function archiveFile(dc: DataConnect, vars: ArchiveFileVariables): MutationPromise<ArchiveFileData, ArchiveFileVariables>;
-
-interface ArchiveOldFilesRef {
-  /* Allow users to create refs without passing in DataConnect */
-  (vars: ArchiveOldFilesVariables): MutationRef<ArchiveOldFilesData, ArchiveOldFilesVariables>;
-  /* Allow users to pass in custom DataConnect instances */
-  (dc: DataConnect, vars: ArchiveOldFilesVariables): MutationRef<ArchiveOldFilesData, ArchiveOldFilesVariables>;
-  operationName: string;
-}
-export const archiveOldFilesRef: ArchiveOldFilesRef;
-
-export function archiveOldFiles(vars: ArchiveOldFilesVariables): MutationPromise<ArchiveOldFilesData, ArchiveOldFilesVariables>;
-export function archiveOldFiles(dc: DataConnect, vars: ArchiveOldFilesVariables): MutationPromise<ArchiveOldFilesData, ArchiveOldFilesVariables>;
-
-interface RestoreFileRef {
-  /* Allow users to create refs without passing in DataConnect */
-  (vars: RestoreFileVariables): MutationRef<RestoreFileData, RestoreFileVariables>;
-  /* Allow users to pass in custom DataConnect instances */
-  (dc: DataConnect, vars: RestoreFileVariables): MutationRef<RestoreFileData, RestoreFileVariables>;
-  operationName: string;
-}
-export const restoreFileRef: RestoreFileRef;
-
-export function restoreFile(vars: RestoreFileVariables): MutationPromise<RestoreFileData, RestoreFileVariables>;
-export function restoreFile(dc: DataConnect, vars: RestoreFileVariables): MutationPromise<RestoreFileData, RestoreFileVariables>;
-
 interface ListFilesRef {
   /* Allow users to create refs without passing in DataConnect */
   (vars?: ListFilesVariables): QueryRef<ListFilesData, ListFilesVariables>;
@@ -570,4 +450,124 @@ export const getArchivedFilesCountRef: GetArchivedFilesCountRef;
 
 export function getArchivedFilesCount(): QueryPromise<GetArchivedFilesCountData, undefined>;
 export function getArchivedFilesCount(dc: DataConnect): QueryPromise<GetArchivedFilesCountData, undefined>;
+
+interface CreateFileRef {
+  /* Allow users to create refs without passing in DataConnect */
+  (vars: CreateFileVariables): MutationRef<CreateFileData, CreateFileVariables>;
+  /* Allow users to pass in custom DataConnect instances */
+  (dc: DataConnect, vars: CreateFileVariables): MutationRef<CreateFileData, CreateFileVariables>;
+  operationName: string;
+}
+export const createFileRef: CreateFileRef;
+
+export function createFile(vars: CreateFileVariables): MutationPromise<CreateFileData, CreateFileVariables>;
+export function createFile(dc: DataConnect, vars: CreateFileVariables): MutationPromise<CreateFileData, CreateFileVariables>;
+
+interface UpdateFileRef {
+  /* Allow users to create refs without passing in DataConnect */
+  (vars: UpdateFileVariables): MutationRef<UpdateFileData, UpdateFileVariables>;
+  /* Allow users to pass in custom DataConnect instances */
+  (dc: DataConnect, vars: UpdateFileVariables): MutationRef<UpdateFileData, UpdateFileVariables>;
+  operationName: string;
+}
+export const updateFileRef: UpdateFileRef;
+
+export function updateFile(vars: UpdateFileVariables): MutationPromise<UpdateFileData, UpdateFileVariables>;
+export function updateFile(dc: DataConnect, vars: UpdateFileVariables): MutationPromise<UpdateFileData, UpdateFileVariables>;
+
+interface DeleteFileRef {
+  /* Allow users to create refs without passing in DataConnect */
+  (vars: DeleteFileVariables): MutationRef<DeleteFileData, DeleteFileVariables>;
+  /* Allow users to pass in custom DataConnect instances */
+  (dc: DataConnect, vars: DeleteFileVariables): MutationRef<DeleteFileData, DeleteFileVariables>;
+  operationName: string;
+}
+export const deleteFileRef: DeleteFileRef;
+
+export function deleteFile(vars: DeleteFileVariables): MutationPromise<DeleteFileData, DeleteFileVariables>;
+export function deleteFile(dc: DataConnect, vars: DeleteFileVariables): MutationPromise<DeleteFileData, DeleteFileVariables>;
+
+interface IncrementDownloadCountRef {
+  /* Allow users to create refs without passing in DataConnect */
+  (vars: IncrementDownloadCountVariables): MutationRef<IncrementDownloadCountData, IncrementDownloadCountVariables>;
+  /* Allow users to pass in custom DataConnect instances */
+  (dc: DataConnect, vars: IncrementDownloadCountVariables): MutationRef<IncrementDownloadCountData, IncrementDownloadCountVariables>;
+  operationName: string;
+}
+export const incrementDownloadCountRef: IncrementDownloadCountRef;
+
+export function incrementDownloadCount(vars: IncrementDownloadCountVariables): MutationPromise<IncrementDownloadCountData, IncrementDownloadCountVariables>;
+export function incrementDownloadCount(dc: DataConnect, vars: IncrementDownloadCountVariables): MutationPromise<IncrementDownloadCountData, IncrementDownloadCountVariables>;
+
+interface CreateFolderRef {
+  /* Allow users to create refs without passing in DataConnect */
+  (vars: CreateFolderVariables): MutationRef<CreateFolderData, CreateFolderVariables>;
+  /* Allow users to pass in custom DataConnect instances */
+  (dc: DataConnect, vars: CreateFolderVariables): MutationRef<CreateFolderData, CreateFolderVariables>;
+  operationName: string;
+}
+export const createFolderRef: CreateFolderRef;
+
+export function createFolder(vars: CreateFolderVariables): MutationPromise<CreateFolderData, CreateFolderVariables>;
+export function createFolder(dc: DataConnect, vars: CreateFolderVariables): MutationPromise<CreateFolderData, CreateFolderVariables>;
+
+interface UpdateFolderRef {
+  /* Allow users to create refs without passing in DataConnect */
+  (vars: UpdateFolderVariables): MutationRef<UpdateFolderData, UpdateFolderVariables>;
+  /* Allow users to pass in custom DataConnect instances */
+  (dc: DataConnect, vars: UpdateFolderVariables): MutationRef<UpdateFolderData, UpdateFolderVariables>;
+  operationName: string;
+}
+export const updateFolderRef: UpdateFolderRef;
+
+export function updateFolder(vars: UpdateFolderVariables): MutationPromise<UpdateFolderData, UpdateFolderVariables>;
+export function updateFolder(dc: DataConnect, vars: UpdateFolderVariables): MutationPromise<UpdateFolderData, UpdateFolderVariables>;
+
+interface DeleteFolderRef {
+  /* Allow users to create refs without passing in DataConnect */
+  (vars: DeleteFolderVariables): MutationRef<DeleteFolderData, DeleteFolderVariables>;
+  /* Allow users to pass in custom DataConnect instances */
+  (dc: DataConnect, vars: DeleteFolderVariables): MutationRef<DeleteFolderData, DeleteFolderVariables>;
+  operationName: string;
+}
+export const deleteFolderRef: DeleteFolderRef;
+
+export function deleteFolder(vars: DeleteFolderVariables): MutationPromise<DeleteFolderData, DeleteFolderVariables>;
+export function deleteFolder(dc: DataConnect, vars: DeleteFolderVariables): MutationPromise<DeleteFolderData, DeleteFolderVariables>;
+
+interface ArchiveFileRef {
+  /* Allow users to create refs without passing in DataConnect */
+  (vars: ArchiveFileVariables): MutationRef<ArchiveFileData, ArchiveFileVariables>;
+  /* Allow users to pass in custom DataConnect instances */
+  (dc: DataConnect, vars: ArchiveFileVariables): MutationRef<ArchiveFileData, ArchiveFileVariables>;
+  operationName: string;
+}
+export const archiveFileRef: ArchiveFileRef;
+
+export function archiveFile(vars: ArchiveFileVariables): MutationPromise<ArchiveFileData, ArchiveFileVariables>;
+export function archiveFile(dc: DataConnect, vars: ArchiveFileVariables): MutationPromise<ArchiveFileData, ArchiveFileVariables>;
+
+interface ArchiveOldFilesRef {
+  /* Allow users to create refs without passing in DataConnect */
+  (vars: ArchiveOldFilesVariables): MutationRef<ArchiveOldFilesData, ArchiveOldFilesVariables>;
+  /* Allow users to pass in custom DataConnect instances */
+  (dc: DataConnect, vars: ArchiveOldFilesVariables): MutationRef<ArchiveOldFilesData, ArchiveOldFilesVariables>;
+  operationName: string;
+}
+export const archiveOldFilesRef: ArchiveOldFilesRef;
+
+export function archiveOldFiles(vars: ArchiveOldFilesVariables): MutationPromise<ArchiveOldFilesData, ArchiveOldFilesVariables>;
+export function archiveOldFiles(dc: DataConnect, vars: ArchiveOldFilesVariables): MutationPromise<ArchiveOldFilesData, ArchiveOldFilesVariables>;
+
+interface RestoreFileRef {
+  /* Allow users to create refs without passing in DataConnect */
+  (vars: RestoreFileVariables): MutationRef<RestoreFileData, RestoreFileVariables>;
+  /* Allow users to pass in custom DataConnect instances */
+  (dc: DataConnect, vars: RestoreFileVariables): MutationRef<RestoreFileData, RestoreFileVariables>;
+  operationName: string;
+}
+export const restoreFileRef: RestoreFileRef;
+
+export function restoreFile(vars: RestoreFileVariables): MutationPromise<RestoreFileData, RestoreFileVariables>;
+export function restoreFile(dc: DataConnect, vars: RestoreFileVariables): MutationPromise<RestoreFileData, RestoreFileVariables>;
 
