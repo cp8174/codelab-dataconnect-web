@@ -117,6 +117,8 @@ type File @table {
   description: String @col(dataType: "text")
   tags: [String]
   isPublic: Boolean @default(value: false)
+  isArchived: Boolean @default(value: false)
+  archivedAt: Timestamp
   downloadCount: Int @default(value: 0)
 }
 

@@ -1,0 +1,6 @@
+connectorId: file-connector
+generate:
+  javascriptSdk:
+    package: "@file/dataconnect"
+    outputDir: ../../app/src/lib/file-dataconnect-sdk
+    packageJsonDir: "../../app"

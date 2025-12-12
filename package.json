@@ -1,0 +1,12 @@
+{
+  "name": "codelab-dataconnect-web",
+  "version": "1.0.0",
+  "scripts": {
+    "archive-files": "node scripts/archiveOldFiles.js",
+    "archive-files:test": "ARCHIVE_AFTER_MINUTES=5 node scripts/archiveOldFiles.js"
+  },
+  "dependencies": {
+    "firebase-admin": "^13.6.0",
+    "google-auth-library": "^9.0.0"
+  }
+}

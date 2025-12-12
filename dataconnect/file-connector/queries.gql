@@ -1,0 +1,176 @@
+# ============================================
+# File Management Queries
+# ============================================
+
+# List all files (optionally filtered by folder)
+query ListFiles($folderId: UUID) @auth(level: PUBLIC) {
+  files(where: { folderId: { eq: $folderId } }, orderBy: { uploadedAt: DESC }) {
+    id
+    name
+    storagePath
+    mimeType
+    size
+    folderId
+    uploadedBy
+    uploadedAt
+    updatedAt
+    description
+    tags
+    isPublic
+    downloadCount
+  }
+}
+
+# List all files by user
+query ListFilesByUser @auth(level: USER) {
+  files(where: { uploadedBy: { eq_expr: "auth.uid" } }, orderBy: { uploadedAt: DESC }) {
+    id
+    name
+    storagePath
+    mimeType
+    size
+    folderId
+    uploadedBy
+    uploadedAt
+    description
+    tags
+    downloadCount
+  }
+}
+
+# Get a single file by ID
+query GetFile($id: UUID!) @auth(level: PUBLIC) {
+  file(id: $id) {
+    id
+    name
+    storagePath
+    mimeType
+    size
+    folderId
+    folder {
+      id
+      name
+    }
+    uploadedBy
+    uploadedAt
+    updatedAt
+    description
+    tags
+    isPublic
+    downloadCount
+  }
+}
+
+# List all folders (optionally filtered by parent folder)
+query ListFolders($parentFolderId: UUID) @auth(level: PUBLIC) {
+  folders(where: { parentFolderId: { eq: $parentFolderId } }, orderBy: { createdAt: DESC }) {
+    id
+    name
+    parentFolderId
+    createdBy
+    createdAt
+    description
+    color
+  }
+}
+
+# Get a single folder by ID
+query GetFolder($id: UUID!) @auth(level: PUBLIC) {
+  folder(id: $id) {
+    id
+    name
+    parentFolderId
+    parentFolder {
+      id
+      name
+    }
+    createdBy
+    createdAt
+    description
+    color
+  }
+}
+
+# Search files by name
+query SearchFiles($searchTerm: String!) @auth(level: PUBLIC) {
+  files(where: { name: { contains: $searchTerm } }, orderBy: { uploadedAt: DESC }) {
+    id
+    name
+    storagePath
+    mimeType
+    size
+    folderId
+    uploadedBy
+    uploadedAt
+    description
+    tags
+    downloadCount
+  }
+}
+
+# Get recent files
+query GetRecentFiles($limit: Int = 20) @auth(level: PUBLIC) {
+  files(orderBy: { uploadedAt: DESC }, limit: $limit) {
+    id
+    name
+    storagePath
+    mimeType
+    size
+    folderId
+    uploadedBy
+    uploadedAt
+    description
+    tags
+    downloadCount
+  }
+}
+
+# Get storage stats for a user
+query GetUserStorageStats @auth(level: USER) {
+  files(where: { uploadedBy: { eq_expr: "auth.uid" } }) {
+    size
+  }
+}
+
+# ============================================
+# Archive Queries
+# ============================================
+
+# List archived files for current user
+query ListArchivedFiles @auth(level: USER) {
+  files(
+    where: {
+      _and: [
+        { uploadedBy: { eq_expr: "auth.uid" } }
+        { isArchived: { eq: true } }
+      ]
+    }
+    orderBy: { archivedAt: DESC }
+  ) {
+    id
+    name
+    storagePath
+    mimeType
+    size
+    uploadedBy
+    uploadedAt
+    archivedAt
+    description
+    tags
+    downloadCount
+  }
+}
+
+# Get count of archived files
+query GetArchivedFilesCount @auth(level: USER) {
+  files(
+    where: {
+      _and: [
+        { uploadedBy: { eq_expr: "auth.uid" } }
+        { isArchived: { eq: true } }
+      ]
+    }
+  ) {
+    id
+  }
+}
