@@ -1,0 +1,149 @@
+# ============================================
+# File Management Mutations
+# ============================================
+
+# Create a new file entry (after uploading to storage)
+mutation CreateFile(
+  $name: String!
+  $storagePath: String!
+  $mimeType: String
+  $size: Int64!
+  $folderId: UUID
+  $description: String
+  $tags: [String!]
+  $isPublic: Boolean
+) @auth(level: USER) {
+  file_insert(
+    data: {
+      name: $name
+      storagePath: $storagePath
+      mimeType: $mimeType
+      size: $size
+      folderId: $folderId
+      uploadedBy_expr: "auth.uid"
+      description: $description
+      tags: $tags
+      isPublic: $isPublic
+    }
+  )
+}
+
+# Update file metadata
+mutation UpdateFile(
+  $id: UUID!
+  $name: String
+  $description: String
+  $tags: [String!]
+  $isPublic: Boolean
+  $folderId: UUID
+) @auth(level: USER) {
+  file_update(
+    id: $id
+    data: {
+      name: $name
+      description: $description
+      tags: $tags
+      isPublic: $isPublic
+      folderId: $folderId
+    }
+  )
+}
+
+# Delete a file entry
+mutation DeleteFile($id: UUID!) @auth(level: USER) {
+  file_delete(id: $id)
+}
+
+# Increment download count
+mutation IncrementDownloadCount($id: UUID!, $newCount: Int!) @auth(level: USER) {
+  file_update(
+    id: $id
+    data: { downloadCount: $newCount }
+  )
+}
+
+# ============================================
+# Folder Management Mutations
+# ============================================
+
+# Create a new folder
+mutation CreateFolder(
+  $name: String!
+  $parentFolderId: UUID
+  $description: String
+  $color: String
+) @auth(level: USER) {
+  folder_insert(
+    data: {
+      name: $name
+      parentFolderId: $parentFolderId
+      createdBy_expr: "auth.uid"
+      description: $description
+      color: $color
+    }
+  )
+}
+
+# Update folder
+mutation UpdateFolder(
+  $id: UUID!
+  $name: String
+  $description: String
+  $color: String
+) @auth(level: USER) {
+  folder_update(
+    id: $id
+    data: {
+      name: $name
+      description: $description
+      color: $color
+    }
+  )
+}
+
+# Delete a folder
+mutation DeleteFolder($id: UUID!) @auth(level: USER) {
+  folder_delete(id: $id)
+}
+
+# ============================================
+# File Archiving Mutations
+# ============================================
+
+# Archive a file
+mutation ArchiveFile($id: UUID!) @auth(level: USER) {
+  file_update(
+    id: $id
+    data: {
+      isArchived: true
+      archivedAt_time: { now: true }
+    }
+  )
+}
+
+# Archive files older than specified timestamp (only callable by Cloud Functions)
+mutation ArchiveOldFiles($olderThan: Timestamp!) @auth(level: NO_ACCESS) {
+  file_updateMany(
+    where: {
+      _and: [
+        { uploadedAt: { lt: $olderThan } }
+        { isArchived: { eq: false } }
+      ]
+    }
+    data: {
+      isArchived: true
+      archivedAt_time: { now: true }
+    }
+  )
+}
+
+# Restore archived file
+mutation RestoreFile($id: UUID!) @auth(level: USER) {
+  file_update(
+    id: $id
+    data: {
+      isArchived: false
+      archivedAt: null
+    }
+  )
+}

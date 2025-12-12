@@ -22,4 +22,4 @@ schema:
       database: "zfile-manager-v2"
       cloudSql:
         instanceId: "your-instance-id"
-connectorDirs: ["./movie-connector"]
+connectorDirs: ["./movie-connector", "./file-connector"]

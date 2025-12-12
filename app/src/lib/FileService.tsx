@@ -35,11 +35,16 @@ import {
   ListFoldersData,
   GetRecentFilesData,
   GetUserStorageStatsData,
-} from '@movie/dataconnect';
+} from '@file/dataconnect';
 
 import { getStorage, ref, uploadBytesResumable, getDownloadURL, deleteObject } from 'firebase/storage';
+import { auth } from './firebase';
 
 const storage = getStorage();
+
+// NOTE: Activity logging is now handled automatically by Cloud Function mutation triggers
+// (onFileCreated, onFileUpdated in functions/index.js)
+// The logFileActivity HTTP endpoint is kept as a backup/manual option
 
 export interface UploadProgress {
   progress: number;
@@ -62,10 +67,9 @@ export const handleListFiles = async (
 
 // List files by user
 export const handleListFilesByUser = async (
-  userId: string
 ): Promise<ListFilesData['files'] | null> => {
   try {
-    const result = await listFilesByUser({ userId });
+    const result = await listFilesByUser();
     return result.data.files;
   } catch (error) {
     console.error('Error fetching user files:', error);
@@ -127,10 +131,9 @@ export const handleGetRecentFiles = async (
 
 // Get storage stats
 export const handleGetStorageStats = async (
-  userId: string
 ) => {
   try {
-    const result = await getUserStorageStats({ userId });
+    const result = await getUserStorageStats();
     const files = result.data.files;
     
     const totalSize = files.reduce((acc, file) => acc + Number(file.size || 0), 0);
@@ -181,14 +184,16 @@ export const handleUploadFile = async (
               mimeType: file.type || 'application/octet-stream',
               size: file.size.toString(),
               folderId: folderId || null,
-              uploadedBy: userId,
               description: null,
               tags: [],
               isPublic: false,
             });
             
+            const fileId = result.data.file_insert.id;
+            
+            // Activity logging now handled by Cloud Function mutation trigger
             onProgress?.({ progress: 100, state: 'success' });
-            resolve(result.data.file_insert.id);
+            resolve(fileId);
           } catch (error) {
             console.error('Error creating file metadata:', error);
             reject(error);
@@ -236,7 +241,8 @@ export const handleDownloadFile = async (
 // Delete file from storage and metadata
 export const handleDeleteFile = async (
   fileId: string,
-  storagePath: string
+  storagePath: string,
+  fileName?: string
 ): Promise<void> => {
   try {
     // Delete from storage
@@ -245,6 +251,8 @@ export const handleDeleteFile = async (
     
     // Delete metadata
     await deleteFile({ id: fileId });
+    
+    // Activity logging handled by mutation trigger (if implemented)
   } catch (error) {
     console.error('Error deleting file:', error);
     throw error;
@@ -271,6 +279,8 @@ export const handleUpdateFile = async (
       isPublic: updates.isPublic ?? null,
       folderId: updates.folderId || null,
     });
+    
+    // Activity logging handled by mutation trigger
   } catch (error) {
     console.error('Error updating file:', error);
     throw error;
@@ -280,7 +290,6 @@ export const handleUpdateFile = async (
 // Create folder
 export const handleCreateFolder = async (
   name: string,
-  userId: string,
   parentFolderId?: string,
   description?: string,
   color?: string
@@ -289,7 +298,6 @@ export const handleCreateFolder = async (
     const result = await createFolder({
       name,
       parentFolderId: parentFolderId || null,
-      createdBy: userId,
       description: description || null,
       color: color || null,
     });

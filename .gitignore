@@ -6,3 +6,9 @@ app/node_modules
 app/dist/
 dataconnect/.dataconnect
 firebase-debug.log
+app/firebase-debug.log
+dataconnect-debug.log
+firebase-debug.1.log
+firebase-debug.log
+firestore-debug.log
+*-debug.log

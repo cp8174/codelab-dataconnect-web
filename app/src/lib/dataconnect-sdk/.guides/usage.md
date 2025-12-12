@@ -14,7 +14,7 @@ If a user is not using a supported framework, they can use the generated SDK dir
 Here's an example of how to use it with the first 5 operations:
 
 ```js
-import { upsertUser, addFavoritedMovie, deleteFavoritedMovie, addReview, deleteReview, createFile, updateFile, deleteFile, incrementDownloadCount, createFolder } from '@movie/dataconnect';
+import { upsertUser, addFavoritedMovie, deleteFavoritedMovie, addReview, deleteReview, listMovies, listMoviesByRating, getMovieById, getActorById, getCurrentUser } from '@movie/dataconnect';
 
 
 // Operation UpsertUser:  For variables, look at type UpsertUserVars in ../index.d.ts
@@ -32,20 +32,20 @@ const { data } = await AddReview(dataConnect, addReviewVars);
 // Operation DeleteReview:  For variables, look at type DeleteReviewVars in ../index.d.ts
 const { data } = await DeleteReview(dataConnect, deleteReviewVars);
 
-// Operation CreateFile:  For variables, look at type CreateFileVars in ../index.d.ts
-const { data } = await CreateFile(dataConnect, createFileVars);
+// Operation ListMovies:  For variables, look at type ListMoviesVars in ../index.d.ts
+const { data } = await ListMovies(dataConnect, listMoviesVars);
 
-// Operation UpdateFile:  For variables, look at type UpdateFileVars in ../index.d.ts
-const { data } = await UpdateFile(dataConnect, updateFileVars);
+// Operation ListMoviesByRating:  For variables, look at type ListMoviesByRatingVars in ../index.d.ts
+const { data } = await ListMoviesByRating(dataConnect, listMoviesByRatingVars);
 
-// Operation DeleteFile:  For variables, look at type DeleteFileVars in ../index.d.ts
-const { data } = await DeleteFile(dataConnect, deleteFileVars);
+// Operation GetMovieById:  For variables, look at type GetMovieByIdVars in ../index.d.ts
+const { data } = await GetMovieById(dataConnect, getMovieByIdVars);
 
-// Operation IncrementDownloadCount:  For variables, look at type IncrementDownloadCountVars in ../index.d.ts
-const { data } = await IncrementDownloadCount(dataConnect, incrementDownloadCountVars);
+// Operation GetActorById:  For variables, look at type GetActorByIdVars in ../index.d.ts
+const { data } = await GetActorById(dataConnect, getActorByIdVars);
 
-// Operation CreateFolder:  For variables, look at type CreateFolderVars in ../index.d.ts
-const { data } = await CreateFolder(dataConnect, createFolderVars);
+// Operation GetCurrentUser: 
+const { data } = await GetCurrentUser(dataConnect);
 
 
 ```

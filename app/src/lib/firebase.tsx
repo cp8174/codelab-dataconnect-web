@@ -21,7 +21,8 @@ import {
   getDataConnect,
 } from "firebase/data-connect";
 import { getStorage, connectStorageEmulator } from "firebase/storage";
-import { connectorConfig } from '@movie/dataconnect';
+import { connectorConfig as movieConnectorConfig } from '@movie/dataconnect';
+import { connectorConfig as fileConnectorConfig } from '@file/dataconnect';
 import { createContext } from "react";
 
 const firebaseConfig = {
@@ -37,11 +38,13 @@ const firebaseApp =
   getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
 
 const auth = getAuth(firebaseApp);
-const dataconnect = getDataConnect(firebaseApp, connectorConfig);
+const movieDataConnect = getDataConnect(firebaseApp, movieConnectorConfig);
+const fileDataConnect = getDataConnect(firebaseApp, fileConnectorConfig);
 const storage = getStorage(firebaseApp);
 
 if (process.env.NODE_ENV === "development") {
-  connectDataConnectEmulator(dataconnect, "127.0.0.1", 9390, false);
+  connectDataConnectEmulator(movieDataConnect, "127.0.0.1", 9390, false);
+  connectDataConnectEmulator(fileDataConnect, "127.0.0.1", 9390, false);
   connectAuthEmulator(auth, "http://localhost:9089");
   connectStorageEmulator(storage, "127.0.0.1", 9199);
 }
@@ -52,4 +55,6 @@ function AuthProvider({ children }: { children: React.ReactNode }) {
   return <AuthContext.Provider value={auth}>{children}</AuthContext.Provider>;
 }
 
-export { AuthContext, AuthProvider };
+export { auth, storage, movieDataConnect, fileDataConnect, firebaseApp, AuthContext, AuthProvider };
+// Backward compatibility
+export const dataconnect = movieDataConnect;
