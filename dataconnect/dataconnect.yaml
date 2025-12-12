@@ -23,7 +23,4 @@ schema:
       cloudSql:
         instanceId: "firebase-data-connect-cloudsql"
       schemaValidation: "COMPATIBLE"
-      user: "dataconnect-sa"
-      password:
-        secretId: "dataconnect-password"
 connectorDirs: ["./movie-connector", "./file-connector"]
